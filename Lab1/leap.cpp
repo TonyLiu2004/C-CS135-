@@ -2,7 +2,7 @@
 Author: Tony Liu
 Course: CSCI-135
 Instructor: Genady Maryash
-Assignment: Lab1 Task B
+Assignment: Lab1 Task C
 
 Enter year, returns if the year is a common year or leap year
 */

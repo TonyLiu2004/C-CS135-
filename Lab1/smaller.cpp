@@ -2,7 +2,7 @@
 Author: Tony Liu
 Course: CSCI-135
 Instructor: Genady Maryash
-Assignment: Lab1 Task B
+Assignment: Lab1 Task A
 
 Enter two numbers and it will print the smallest of the two numbers
 */

@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Lab1 Task D
+
+Enter year and month, returns how many days are in that month. Includes leap years.
+*/
 #include <iostream>
 using namespace std;
 
