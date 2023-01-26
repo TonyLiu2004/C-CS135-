@@ -2,9 +2,6 @@
 using namespace std;
 
 int main(){
-    cout << "Hello World!" << endl;
-    int num;
-    cout << "Enter number: ";
-    cin >> num;
+    cout << 128%4;
     return 0;
 }
