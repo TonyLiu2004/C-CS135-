@@ -19,8 +19,8 @@ int main(){
     cout << "What is your favorite game?" << endl;
     cin >> favGame;
 
-    cout << "Your favorite food is: " << favFood << endl;
-    cout << "Your favorite movie is: " << favMovie << endl;
-    cout << "Your favorite game is: " << favGame << endl;
+    cout << favFood << endl;
+    cout << favMovie << endl;
+    cout << favGame << endl;
     return 0;
 }
