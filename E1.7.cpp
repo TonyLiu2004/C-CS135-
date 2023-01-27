@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: E1.7
+
+Answer three questions, code will print what you answered in 3 seperate lines
+*/
 #include <iostream>
 using namespace std;
 int main(){
