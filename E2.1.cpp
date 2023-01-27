@@ -9,9 +9,9 @@ Enter gallons, fuel efficiency, and price. Returns cost per 100 miles and how ma
 #include <iostream>
 using namespace std;
 int main(){
-    int gallons;
-    int fuelEff;
-    int price;
+    double gallons;
+    double fuelEff;
+    double price;
 
     cout << "Enter gallons of gas in tank: " << endl;
     cin >> gallons;
