@@ -4,7 +4,7 @@ Course: CSCI-135
 Instructor: Genady Maryash
 Assignment: Project 1B Task B
 
-Reads equations from formula.txt and returns the answer
+Reads one equation from formula.txt and returns the answer
 */
 #include <iostream>
 #include <string>
@@ -49,12 +49,13 @@ int main(){
             temp = temp + f[i];
         }
     }
+    //deals with loop missing the last number
     if(next == '+'){
         ans +=stoi(temp);
     }else if(next == '-'){
         ans -= stoi(temp);
     }
-    
+
     cout << ans;
     return 0;
 }
