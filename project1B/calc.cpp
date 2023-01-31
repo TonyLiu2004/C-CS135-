@@ -1,9 +1,23 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 1B Task B
+
+Reads equations from formula.txt and returns the answer
+*/
 #include <iostream>
 #include <string>
 using namespace std;
-
 int main(){
-    string f = "10+3-3+3+25";
+    string f = "";
+    string c;
+    //writes the equation into a string f
+    while (cin >> c){
+        f = f + c;
+    }
+
+    //loops through the string to perform calculations
     int ans = 0;
     string temp = "";
     char next = '!';
@@ -40,6 +54,7 @@ int main(){
     }else if(next == '-'){
         ans -= stoi(temp);
     }
+    
     cout << ans;
     return 0;
 }
