@@ -16,6 +16,6 @@ int main(){
         cout << "Re-enter an integer between 0 and 100: ";
         cin >> num;
     }
-    cout << "Number squared is " << num*num;
+    cout << "Number squared is " << num*num << endl;
     return 0;
 }
