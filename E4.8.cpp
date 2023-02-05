@@ -1,11 +1,10 @@
-/*
-Author: Tony Liu
-Course: CSCI-135
-Instructor: Genady Maryash
-Assignment: E4.8
+//Author: Tony Liu
+//Course: CSCI-135
+//Instructor: Genady Maryash
+//Assignment: E4.8
 
-Input a string, prints out every letter in the string
-*/
+//Input a string, prints out every letter in the string
+
 #include <iostream>
 #include <string>
 using namespace std;
