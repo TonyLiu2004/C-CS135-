@@ -7,6 +7,7 @@ Assignment: E4.8
 Input a string, prints out every letter in the string
 */
 #include <iostream>
+#include <string>
 using namespace std;
 int main(){
     string str = "Hello";
