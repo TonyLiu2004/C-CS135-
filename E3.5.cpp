@@ -1,13 +1,12 @@
-/*
-Author: Tony Liu
-Course: CSCI-135
-Instructor: Genady Maryash
-Assignment: E3.5
+//Author: Tony Liu
+//Course: CSCI-135
+//Instructor: Genady Maryash
+//Assignment: E3.5
 
-Input three numbers, returns increasing if the number is in 
-increasing order and decreasing if the numbers are in decreasing order. 
-returns neither if otherwise
-*/
+//Input three numbers, returns increasing if the number is in 
+//increasing order and decreasing if the numbers are in decreasing order. 
+//returns neither if otherwise
+
 #include <iostream>
 using namespace std;
 int main(){
