@@ -1,3 +1,10 @@
+//Author: Tony Liu
+//Course: CSCI-135
+//Instructor: Genady Maryash
+//Assignment: Lab3 B
+
+//Returns the minimin and maximum storage
+//in East basin in 2018 
 #include <iostream>
 #include <fstream>
 #include <cstdlib>

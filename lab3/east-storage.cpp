@@ -1,3 +1,9 @@
+//Author: Tony Liu
+//Course: CSCI-135
+//Instructor: Genady Maryash
+//Assignment: Lab3 A
+
+//Enter date in MM/DD/YYYY format, returns the east basin storage for that day.
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
