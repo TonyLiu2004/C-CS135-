@@ -16,17 +16,16 @@ int main(){
 
     bool alt = false;
     for(int i=1;i<height+1;i++){
-        if(alt){
+        if(alt){ //for alternate rows
             cout << "   ";
         }
+        //prints the squares
         bool pSpace = false;
         for(int j =0;j<width;j++){
             if(j%6==0){
                 pSpace = false;
-            }else{
-                if(j%3==0){
-                    pSpace = true;
-                }
+            }else if(j%3==0){
+                pSpace = true;
             }
             if(pSpace){
                 cout << " ";
@@ -34,16 +33,15 @@ int main(){
                 cout << "*";  
             }
         }
+
+        //checkerboard mechanics
         if(i%6==0){
             alt = false;
             width +=3;
-        }else{
-            if(i%3==0){
-                alt = true;
-                width -=3;
-            }
+        }else if(i%3==0){
+            alt = true;
+            width -=3;
         }
-
         cout << endl;
     }
     return 0;
