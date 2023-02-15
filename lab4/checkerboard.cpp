@@ -9,10 +9,7 @@ using namespace std;
 int main(){
     int width;
     int height;
-    cout << "Input width: ";
-    cin >> width;
-    cout << "Input height: ";
-    cin >> height;
+    cin >> width >> height;
     for(int i=0;i<height;i++){
         for(int j =0;j<width;j++){
             if(i%2==1){

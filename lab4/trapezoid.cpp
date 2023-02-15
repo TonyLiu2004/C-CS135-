@@ -10,10 +10,7 @@ using namespace std;
 int main(){
     int width;
     int height;
-    cout << "Input width: ";
-    cin >> width;
-    cout << "Input height: ";
-    cin >> height;
+    cin >> width >> height;
     if(((height-1)*2) > (width-1)){
         cout << "Impossible shape!";
         return 0;

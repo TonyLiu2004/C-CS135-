@@ -9,7 +9,6 @@ using namespace std;
 int main(){
     int side;
     int num=1;
-    cout << "Input side length: ";
     cin >> side;
     for(int i=side;i>0;i--){
         for(int j=0;j<num;j++){
