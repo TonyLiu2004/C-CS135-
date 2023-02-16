@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Lab5
+
+Includes a lot of prime functions
+*/
 #include <iostream>
 using namespace std;
 
@@ -7,6 +15,7 @@ int nextPrime(int);
 int countPrimes(int, int);
 bool isTwinPrime(int);
 int nextTwinPrime(int);
+int largestTwinPrime(int, int);
 
 int main(){
     cout << "isDivisibleBy: " << "\n";
@@ -34,6 +43,10 @@ int main(){
     cout << nextTwinPrime(10) << "\n";
     cout << nextTwinPrime(20) << "\n";
 
+    cout << "\n" << "largestTwinPrime" << "\n";
+    cout << largestTwinPrime(5,18) << "\n";
+    cout << largestTwinPrime(1,31) << "\n";
+    cout << largestTwinPrime(14,16) << "\n";
 
     return 0;
 }
@@ -97,4 +110,15 @@ int nextTwinPrime(int n){
         }
     }
     return -1;
+}
+
+//Input integers a and b, returns the largest twin prime between a and b
+int largestTwinPrime(int a, int b){
+    int largest = -1;
+    for(int i = a; i <= b; i++){
+        if(isTwinPrime(i)){
+            largest = i;
+        }
+    }
+    return largest;
 }
