@@ -10,35 +10,27 @@ Reads the DNA strand text file dna.txt and prints the mRNA counterpart
 #include <iostream>
 #include <string>
 #include <fstream>
-int main(){
-    std::ifstream fin("dna.txt");
-    if (fin.fail()) {
-        std::cerr << "File cannot be read, opened, or does not exist.\n";
-        exit(1);
+#include <cstdlib>
+#include "transcriptase.h"
+
+std::string transcriptase(std::string strand){
+    std::string ret = "";
+    for(char c : strand){
+        ret += DNAbase_to_mRNAbase(c);
     }
-    std::string strand;
-    while(std::getline(fin, strand)) {
-        for(char c : strand){
-            switch(c){
-                case 'A':
-                    std::cout << "U";
-                    break;
-                case 'T':
-                    std::cout << "A";
-                    break;
-                case 'C':
-                    std::cout << "G";
-                    break;
-                case 'G':
-                    std::cout << "C";
-                    break;
-                default:
-                    std::cout << " ";
-                    break;
-            }
-        }
-        std::cout << "\n";
+    return ret;
+}
+
+char DNAbase_to_mRNAbase(char c){
+    switch(toupper(c)){
+        case 'A':
+            return 'U';
+        case 'T':
+            return 'A';
+        case 'C':
+            return 'G';
+        case 'G':
+            return 'C';
     }
-    fin.close();
-    return 0;
+    return ' ';
 }
