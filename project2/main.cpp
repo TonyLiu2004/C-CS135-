@@ -2,6 +2,8 @@
 #include "transcriptase.h"
 
 int main(){
-    std::cout << transcriptase("TAC");
+    std::cout << transcriptase("CCTCTAAGATTTGTTTGATACGTTACTTGTGCAGTCGAAGCTTTG") << "\n";
+    std::cout << transcriptase("GTAGGCTTACGCTAAGCCTACGTTACTTGTGCAGTCGAAGCTTTG") << "\n";
+
     return 0;
 }
