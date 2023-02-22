@@ -21,10 +21,11 @@ int main(){
     cout << "isDivisibleBy: " << "\n";
     cout << isDivisibleBy(10,5) << "\n";
     cout << isDivisibleBy(20,3) << "\n";
+    cout << isDivisibleBy(126,252) << "\n";
 
     cout << "\n" << "isPrime: " << "\n";
     cout << isPrime(41) << "\n";
-    cout << isPrime(40) << "\n";
+    cout << isPrime(-5) << "\n";
 
     cout << "\n" << "nextPrime: " << "\n";
     cout << nextPrime(7) << "\n";
@@ -32,7 +33,7 @@ int main(){
     
     cout << "\n" << "countPrimes: " << "\n";
     cout << countPrimes(10,20) << "\n";
-    cout << countPrimes(20,30) << "\n";
+    cout << countPrimes(23,47) << "\n";
 
     cout << "\n" << "isTwinPrime: " << "\n";
     cout << isTwinPrime(17) << "\n";
@@ -53,7 +54,10 @@ int main(){
 
 //Input integers n and d, returns true if n is divisible by d and false otherwise
 bool isDivisibleBy(int n, int d){
-    if(n%d == 0 || d%n ==0){
+    if(d==0){
+        return false;
+    }
+    if(n%d == 0){
         return true;
     }
     return false;
@@ -61,6 +65,9 @@ bool isDivisibleBy(int n, int d){
 
 //Input integer n, returns true if n is prime and false otherwise
 bool isPrime(int n){
+    if(n<2){
+        return false;
+    }
     for(int i =2;i <n-1;i++){
         if(n%i == 0){
             return false;
@@ -84,7 +91,7 @@ int nextPrime(int n){
 //input integers a and b, returns the number of primes found between a and b
 int countPrimes(int a, int b){
     int count = 0;
-    for(int i = a;i<b;i++){
+    for(int i = a;i<=b;i++){
         if(isPrime(i)){
             count++;
         }
@@ -114,11 +121,10 @@ int nextTwinPrime(int n){
 
 //Input integers a and b, returns the largest twin prime between a and b
 int largestTwinPrime(int a, int b){
-    int largest = -1;
-    for(int i = a; i <= b; i++){
+    for(int i = b; i > a;i--){
         if(isTwinPrime(i)){
-            largest = i;
+            return i;
         }
     }
-    return largest;
+    return -1;
 }
