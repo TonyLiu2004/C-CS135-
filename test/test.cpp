@@ -1,20 +1,41 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 using namespace std;
 
-int main(){
+void sort(int a[],int b);
 
-    int temp[10];
-    int n = ((sizeof(temp)/sizeof(int)));
-    std::cout << n << "\n";
-    for(int i = 0;i < n;i++){
-        std::cout << i << "\n";
-        temp[i] = 0;
-        temp[i+1] = 1;
-        temp[i+2] = 2;
+int main(){
+    ifstream fin("text.txt");
+    if(fin.fail()){
+        cout << "file cannot be opened";
+        exit(1);
     }
-    for(int i : temp){
-        std::cout << i;
+    string a;
+    while(fin >> a){
+        cout << a << endl;
+    }
+    cout << "------------------" << endl;
+    int l[] = {12,3,4,6,6,71,3,4,56,7,2,0};
+    int track = 0;
+    for(auto b : l){
+        track++;
+    }
+    sort(l,track);
+    for (int a : l){
+        cout << a << endl;
     }
    return 0;
+}
+
+void sort(int a[], int b){
+    for(int i = 0;i < b;i++){
+        for(int x = i;x < b;x++){
+            if(a[x] < a[i]){
+                int t = a[i];
+                a[i] = a[x];
+                a[x] = t;
+            }
+        }
+    }
 }
