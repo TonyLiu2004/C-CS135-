@@ -1,3 +1,12 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: E5.15
+
+input three  integers into sort3() to order them by which integer 
+is larger. sort3 directly changes the integers.
+*/
 #include <iostream>
 
 void sort2(int&, int&);

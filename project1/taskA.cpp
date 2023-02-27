@@ -10,16 +10,16 @@ three arrays: WORDS, DEFINITIONS, and POS.
 **/
 #include <iostream>
 #include <fstream>
-#include <cctype>
+#include <string>
 using namespace std;
 
 //Globals
-const int MAX_WORDS = 1000;
-int WORD_COUNT = 0;
+const int g_MAX_WORDS = 1000;
+int g_word_count = 0;
 
-string WORDS[MAX_WORDS];
-string DEFINITIONS[MAX_WORDS];
-string POS[MAX_WORDS];
+string g_words[g_MAX_WORDS];
+string g_definitions[g_MAX_WORDS];
+string g_pos[g_MAX_WORDS];
 
 /*
     @param            :   The string with a query word
@@ -71,13 +71,16 @@ int countPrefix(string prefix);
                           to the number of words read
 */
 void readWords(string filename);
-int getSpace(string);
-string getFirst(string&);
-string lower(string);
+int getSpace(string a);
+string getFirst(string& a);
+int countPrefix(string p);
+int getIndex(string word);
+string lower(string a);
 
+/*
 int main(){ 
     readWords("text.txt");
-
+    
     cout << "get word index: " << getIndex("WORD") << "\n";
     cout << "get def: " << getDefinition("grumpy") << "\n";
     cout << "get POS: " << getPOS("gRUMPY") << "\n";
@@ -106,8 +109,11 @@ int main(){
             cout << x << ",";
         }
     }
+    
     return 0;
 }
+*/
+
 
 void readWords(string filename){
     ifstream fin(filename);
@@ -118,24 +124,17 @@ void readWords(string filename){
         string b = a;
         string word1 = getFirst(b);
         string word2 = getFirst(b);
-        WORDS[words] = word1.substr(0,word1.length()-1); // removes the space at the end
-        POS[words] = word2.substr(0,word2.length()-1); // removes the space at the end
+        g_words[words] = word1.substr(0,word1.length()-1); // removes the space at the end
+        g_pos[words] = word2.substr(0,word2.length()-1); // removes the space at the end
         getFirst(b); // removes the : 
-        DEFINITIONS[words] = b; 
+        g_definitions[words] = b; 
         words++;
     }
-    WORD_COUNT = words;
+    g_word_count = words;
 }
 
 int getSpace(string a){
-    int i = 0;
-    for(char x : a){
-        if(x == ' '){
-            return i+1;
-        }
-        i++;
-    }
-    return 0;
+    return (a.find(" ", 0)+1);
 }
 
 string getFirst(string& a){
@@ -149,8 +148,9 @@ string getFirst(string& a){
 
 int getIndex(string word){
     int n = 0;
-    for(string x : WORDS){
-        if(lower(x) == lower(word)){
+    for(int i = 0;i < 51;i++){
+    //for(string x : WORDS){
+        if(lower(g_words[i]) == lower(word)){
             return n;
         }
         n++;
@@ -162,12 +162,12 @@ string getDefinition(string word){
     if(getIndex(word) == -1){
         return "NOT_FOUND";
     }
-    return DEFINITIONS[getIndex(word)];
+    return g_definitions[getIndex(word)];
 }
 
 string lower(string a){
     string ret = "";
-    for(char b : a){
+    for(auto b : a){
         ret+=tolower(b);
     }
     return ret;
@@ -177,22 +177,13 @@ string getPOS(string a){
     if(getIndex(a) == -1){
         return "NOT_FOUND";
     }
-    return POS[getIndex(a)];
+    return g_pos[getIndex(a)];
 }
 
 int countPrefix(string p){
     int ret = 0;
-    for(string x : WORDS){
-        bool pass = false;
-        for(int i = 0;i < p.length();i++){
-            if(lower(p.substr(i,1)) == lower(x.substr(i,1))){
-                pass = true;
-            }else{
-                pass = false;
-                break;
-            }
-        }
-        if(pass){
+    for(int i = 0;i < 51;i++){
+        if(lower(p) == lower(g_words[i].substr(0,p.length()))){
             ret+=1;
         }
     }
