@@ -2,15 +2,19 @@
 Author: Tony Liu
 Course: CSCI-135
 Instructor: Genady Maryash
-Assignment: Project1 A
+Assignment: Project1 
 
 Reads a text file with words and moves the word itself, 
 the part of speech of the word, and the definition into 
 three arrays: WORDS, DEFINITIONS, and POS.
+
+Uses the dictionary to run a hangman game
 **/
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <stdlib.h>
+#include <ctime>
 using namespace std;
 
 //Globals
@@ -124,6 +128,73 @@ bool editWord(string word, string definition, string pos);
 */
 bool removeWord(string word);
 
+/*
+    @param            :   The string with a word from the dictionary 
+    @return           :   string of "_" based on the number of
+                          characters in the given `word` 
+    @post             :   Return string of "_" based on the length
+                          of the given `word`.
+                          For example, if the word is "game", then
+                          the function would return "____". In other
+                          words, a string of four "_"s.
+*/
+string maskWord(string word);
+
+/*
+    @param            :   The integer for the difficulty of the game
+                          (0 for easy, 1 for normal, and 2 for hard) 
+    @return           :   The number of tries given the `difficulty`
+                          (9 for easy, 7 for normal, and 5 for hard)
+    @post             :   Return the number of tries based on given
+                          difficulty (0-easy: 9 tries, 1-normal: 7
+                          tries, 2-Hard: 5 tries) 
+*/
+int getTries(int difficulty);
+
+/*
+    @param tries      :   The integer for remaining tries 
+    @param difficulty :   The integer for the difficulty of the game 
+                          (0 for easy, 1 for normal, and 2 for hard) 
+    @post             :   prints the number of lives left and number
+                          of lives used using "O" and "X". DO NOT
+                          PRINT AN ENDLINE
+
+    For example : calling `printAttemps(2, 1)` would print "OOXXXXX". 
+                  Based on given `difficulty`, we know the total tries
+                  is 7 (from `getTries(1)`). Also, the player has 2
+                  `tries` remaining based on the given parameter.
+                  Therefore, the function prints two "0"s to indicate
+                  the remaining tries and 5 "X"s to indicate the tries
+                  that have been used (7-2=5)          
+*/
+void printAttempts(int tries, int difficulty);
+
+/*
+    @param word       :   The string word from the dictionary
+    @param letter     :   The char letter that that will be revealed
+    @param(&) current :   The string representing a masked word
+    @return           :   `true` if the `letter` exists in `word`,
+                          otherwise return `false`  
+    @post             :   If the given `letter` exists in `word`
+                          reveal the `letter` in `current` masked word
+                          and return `true`. Otherwise, return `false`
+
+    For example : Let's say we have the following main function:
+                  int main(){
+                      string w = "g___";
+                      cout << revealLetter("good", 'o', "g___") << endl;
+                      cout <<  w << endl;
+                  }
+                  The first `cout` will print 1 because the letter 'o'
+                  exists in "good". Thus, the function returned `true`.
+                  The second `cout` will print "goo_". The variable `w`
+                  has been modified by the function to reveal all the
+                  `o`s in "good" resulting in "goo_"           
+*/
+bool revealLetter(string word, char letter, string &current);
+
+void gameLoop();
+string getRandomWord();
 int getSpace(string a);
 string getFirst(string& a);
 int countPrefix(string p);
@@ -131,6 +202,7 @@ int getIndex(string word);
 string lower(string a);
 string removeSpace(string a);
 void fixSpaces();
+
 /*
 int main(){ 
     readWords("dictionary.txt");
@@ -177,29 +249,27 @@ int main(){
                 cout << x << ",";
             }
         }
+        cout << addWord("test1","test1 def","test1pos") << "\n";
+        cout << addWord("yeet","joy, to throw","verb") << "\n";
+        cout << addWord("cookie","a delicous snack","noun") << "\n";
+        cout << addWord("noob","a bad player, a beginner","noun") << "\n";
+        cout << addWord("test2","test2 def","test2pos") << "\n";
+        removeWord("yeet");
+        removeWord("Grumpy");
     }
-    cout << addWord("test1","test1 def","test1pos") << "\n";
-    cout << addWord("yeet","joy, to throw","verb") << "\n";
-    cout << addWord("cookie","a delicous snack","noun") << "\n";
-    cout << addWord("noob","a bad player, a beginner","noun") << "\n";
-    cout << addWord("test2","test2 def","test2pos") << "\n";
-    cout << "---------------" << endl;
-    for(int i = 0;i < g_word_count+5;i++){
-        cout << i << " " << g_words[i] << endl;
-        cout << i << " " << g_pos[i] << endl;
-        cout << i << " " << g_definitions[i] << endl;
-    }
-    cout << "------------" << endl;
-    removeWord("yeet");
-    removeWord("Grumpy");
-    for(int i = 0;i < g_word_count+5;i++){
-        cout << i << " " << g_words[i] << endl;
-        cout << i << " " << g_pos[i] << endl;
-        cout << i << " " << g_definitions[i] << endl;
-    }
+    cout << maskWord("game") << "\n";
+    cout << getRandomWord() << "\n";
+    cout << getTries(2) << "\n";
+    printAttempts(2,1);
+    cout << endl;
+
+    string temp = "g___";
+    cout << revealLetter("good",'o',temp);
+    gameLoop();
     return 0;
 }
 */
+
 
 void readWords(string filename){
     ifstream fin(filename);
@@ -372,17 +442,114 @@ bool removeWord(string word){
     fixSpaces();
     return ret;
 }
-/*
-bool removeWord(string word){
-    if(getIndex(word) == -1){ // if word does not exist in dictionary, return false
-        return false;
+
+// game-loop for Hangman
+void gameLoop() {
+    int difficulty, tries;
+    string word, current;
+    char letter;
+    while (true) {
+        cout << "Welcome to Hangman!" << endl;
+        cout <<  "0. easy\n1. normal\n2. hard\n3. exit\nChoose a difficulty: ";
+        cin >> difficulty;
+        while (difficulty < 0 || difficulty > 3) {
+            cout <<  "Enough horseplay >_< !\n0. easy\n1. normal\n2. hard\n3. exit\nChoose a difficulty: ";
+            cin >> difficulty;
+        }
+        if (difficulty == 3) {
+            cout << "If you're hangry, go grab a bite! See what I did there?" << endl;
+            break;
+        }
+        word = getRandomWord();
+        current = maskWord(word);
+        tries = getTries(difficulty);
+        while (tries != 0) {
+            cout << "Life: ";
+            printAttempts(tries, difficulty);
+            cout << endl << "Word: "<< current << endl;
+            cout << "Enter a letter: ";
+            cin >> letter;
+            
+            if (!revealLetter(word, letter, current)) {
+                tries--;
+            }
+            if (current == word) {
+                break;
+            }
+            if (tries == 2) {
+                cout << "The part of speech of the word is "<< getPOS(word) << endl;
+            }
+            if (tries == 1) {
+                cout << "Definition of the word: " << getDefinition(word) << endl;
+            }
+        }
+        if (tries == 0) {
+            cout << "The word is \"" << word << "\". Better luck next time! You're getting the ..ahem.. hang of it." << endl;
+        }
+        else {
+            cout << "Congrats!!!" << endl;
+        }
     }
-    int ind = getIndex(word);
-    g_words[ind] ="";
-    g_pos[ind] = "";
-    g_definitions[ind] = "";
-    g_word_count--;
-    fixSpaces();
-    return true;
 }
-*/
+
+
+string getRandomWord() {
+    srand((unsigned) time(NULL));
+    int index = rand() % g_word_count;
+    return g_words[index];
+}
+
+string maskWord(string word){
+    string ret = "";
+    for(auto x : word){
+        ret+="_";
+    }
+    return ret;
+}
+
+int getTries(int difficulty){
+    if(difficulty == 0){
+        return 9;
+    }
+    if(difficulty == 1){
+        return 7;
+    }
+    if(difficulty == 2){
+        return 5;
+    }
+}
+
+void printAttempts(int tries, int difficulty){
+    int t = getTries(difficulty);
+    for(int i = 0;i < t;i++){
+        if(i < tries){
+            cout << "O";
+        }else{
+            cout << "X";
+        }
+    }
+}
+
+bool revealLetter(string word, char letter, string &current){
+    bool ret = false;
+    for(char a : word){
+        if(a == letter){
+            ret = true;
+        }
+    }
+    if(!ret){return false;}
+    string temp = "";
+    string lett;
+    lett.append(1,letter);
+    for(int i = 0;i < current.length();i++){
+        string x = word.substr(i,1);
+        string y = current.substr(i,1);
+        if((x == y) || (x == lett)){
+            temp+=x;
+        }else{
+            temp+="_";
+        }
+    }
+    current = temp;
+    return ret;
+}
