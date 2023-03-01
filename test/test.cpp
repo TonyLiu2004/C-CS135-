@@ -3,18 +3,20 @@
 using namespace std;
 
 int main(){
-
-    int temp[10];
-    int n = ((sizeof(temp)/sizeof(int)));
-    std::cout << n << "\n";
-    for(int i = 0;i < n;i++){
-        std::cout << i << "\n";
-        temp[i] = 0;
-        temp[i+1] = 1;
-        temp[i+2] = 2;
+    string g_words[10] = {"sw","wq","","w","wes"};
+    for(string x : g_words){
+        cout << x << endl;
     }
-    for(int i : temp){
-        std::cout << i;
+    cout << "--------------" << endl;
+    for(int i = 0;i < 5;i++){
+        if(g_words[i] == ""){
+            for(int x = i; x < 5;x++){
+                g_words[x] = g_words[x+1];
+            }
+        }
     }
-   return 0;
+    for(string x : g_words){
+        cout << x << endl;
+    }
+    return 0;
 }

@@ -1,0 +1,10 @@
+professor noun : teacher of the highest rank in a university
+does verb : perform (an action, often of unspecified nature)
+nothing adverb : not at all
+professional noun : a Pro
+donut noun : a tasty treat
+dog noun : an animal
+test1 test1pos : test1 def
+cookie noun : a delicous snack
+noob noun : a bad player, a beginner
+test2 test2pos : test2 def
