@@ -131,7 +131,7 @@ int getIndex(string word);
 string lower(string a);
 string removeSpace(string a);
 void fixSpaces();
-
+/*
 int main(){ 
     readWords("dictionary.txt");
     bool test = false;
@@ -184,7 +184,7 @@ int main(){
     cout << addWord("noob","a bad player, a beginner","noun") << "\n";
     cout << addWord("test2","test2 def","test2pos") << "\n";
     cout << "---------------" << endl;
-    for(int i = 0;i < g_word_count+1;i++){
+    for(int i = 0;i < g_word_count+5;i++){
         cout << i << " " << g_words[i] << endl;
         cout << i << " " << g_pos[i] << endl;
         cout << i << " " << g_definitions[i] << endl;
@@ -192,13 +192,14 @@ int main(){
     cout << "------------" << endl;
     removeWord("yeet");
     removeWord("Grumpy");
-    for(int i = 0;i < g_word_count+1;i++){
+    for(int i = 0;i < g_word_count+5;i++){
         cout << i << " " << g_words[i] << endl;
         cout << i << " " << g_pos[i] << endl;
         cout << i << " " << g_definitions[i] << endl;
     }
     return 0;
 }
+*/
 
 void readWords(string filename){
     ifstream fin(filename);
@@ -297,8 +298,8 @@ void fixSpaces(){
     }
 }
 
+
 bool addWord(string word, string definition, string pos){
-    fixSpaces();
     if((getIndex(word) == -1)&&(g_word_count < g_MAX_WORDS)){
         fstream file;
         file.open("dictionary.txt",ios::app); // open and append
@@ -308,7 +309,6 @@ bool addWord(string word, string definition, string pos){
         g_definitions[g_word_count] = definition;
         g_pos[g_word_count] = pos;
         g_word_count++;
-        fixSpaces();
         //readWords("dictionary.txt"); //re-reads the dictionary file to update everything
         return true;
     }
@@ -316,7 +316,6 @@ bool addWord(string word, string definition, string pos){
 }
 
 bool editWord(string word, string definition, string pos){
-    bool ret = false;
     if(getIndex(word) == -1){ // if word does not exist in dictionary, return false
         return false;
     }
@@ -331,7 +330,6 @@ bool editWord(string word, string definition, string pos){
             temp << first << " " << t << "\n";  
         }else if(first == removeSpace(lower(word))){ // if the line includes the selected word, append the changes instead
             temp << word << " " << pos << " : " << definition << "\n";
-            ret = true;
             g_pos[getIndex(word)] = pos;
             g_definitions[getIndex(word)] = definition;
             g_word_count++;
@@ -341,19 +339,14 @@ bool editWord(string word, string definition, string pos){
     fin.close();
     remove("dictionary.txt");//removes original file
     rename("temp.txt","dictionary.txt"); // renames temp to dictionary after the changes have been made
-    return ret;
+    return true;
 }
 
 bool removeWord(string word){
     bool ret = false;
     if(getIndex(removeSpace(lower(word))) == -1){ // if word does not exist in dictionary, return false
         return false;
-    }  
-    fixSpaces();
-    g_pos[getIndex(word)] = "";
-    g_definitions[getIndex(word)] = "";
-    g_words[getIndex(word)] ="";
-
+    }
     ifstream fin;
     ofstream temp; //makes a temporary file to append to, later on replaces original file with temp
     temp.open("temp.txt");
@@ -370,7 +363,26 @@ bool removeWord(string word){
     fin.close();
     remove("dictionary.txt");//removes original file
     rename("temp.txt","dictionary.txt"); // renames temp to dictionary after the changes have been made
-    fixSpaces();
+
+    int ind = getIndex(word);
+    g_words[ind] ="";
+    g_pos[ind] = "";
+    g_definitions[ind] = "";
     g_word_count--;
+    fixSpaces();
     return ret;
 }
+/*
+bool removeWord(string word){
+    if(getIndex(word) == -1){ // if word does not exist in dictionary, return false
+        return false;
+    }
+    int ind = getIndex(word);
+    g_words[ind] ="";
+    g_pos[ind] = "";
+    g_definitions[ind] = "";
+    g_word_count--;
+    fixSpaces();
+    return true;
+}
+*/
