@@ -1,6 +1,14 @@
 #include <iostream>
 using namespace std;
 
+char shiftChar(char c, int rshift);
+string encryptVigenere(string plaintext, string keyword);
+
+int main(){
+    cout << encryptVigenere("Hello, World!","CaKe") << endl;
+    return 0;
+}
+
 char shiftChar(char c, int rshift){
     char ret = c;
     if(!isalpha(c)){
@@ -14,14 +22,6 @@ char shiftChar(char c, int rshift){
         }else{
             ret+=1;
         }
-    }
-    return ret;
-}
-
-string encryptCaesar(string plaintext, int rshift){
-    string ret = "";
-    for(char x : plaintext){
-        ret+=shiftChar(x,rshift);
     }
     return ret;
 }
@@ -40,35 +40,6 @@ string encryptVigenere(string plaintext, string keyword){
         int position = tolower(keyword[z]) - 'a'; // position in alphabet
         z++;
         ret+=shiftChar(plaintext[i],position);
-    }
-    return ret;
-}
-string decryptCaesar(string ciphertext, int rshift);
-string decryptVigenere(string ciphertext, string rshift);
-int main(){
-    string input = "Hello, World!";
-    int shift = 10;
-    /*
-    cout << "Enter plaintext: ";
-    getline(cin,input);
-    cout << "= Caesar =" << endl;
-    cout << "Enter shift: ";
-    cin >> shift;
-    */
-    cout << "Ciphertext: " << encryptCaesar(input,shift) << endl;
-    cout << "Decrypted: " << decryptCaesar(input,shift) << endl;
-
-    return 0;
-}
-
-string decryptCaesar(string input, int shift){
-    string ret = "";
-    for(char x : input){
-        if(!isalpha(x)){
-            ret+=x;
-        }else{
-            //shift reverse
-        }
     }
     return ret;
 }
