@@ -85,15 +85,15 @@ int main(){
 }
 
 string decryptCaesar(string input, int shift){
-    string ret = "";
-    for(char x : input){
-        if(!isalpha(x)){
-            ret+=x;
-        }else{
-            ret+=reverseChar(x,shift);
+        string ret = "";
+        for(char x : input){
+            if(!isalpha(x)){
+                ret+=x;
+            }else{
+                ret+=reverseChar(x,shift);
+            }
         }
-    }
-    return ret;
+        return ret;
 }
 
 string decryptVigenere(string word, string key){
