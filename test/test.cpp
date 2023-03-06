@@ -8,7 +8,7 @@ int main(){
     *(p+10) = 420;
     cout << "---------------" << endl;
     *p = 0;
-    for(int i = 0;i < 16;i++){
+    for(int i = 0;i < 19;i++){
         cout << *p << endl;
         p++;
     }
