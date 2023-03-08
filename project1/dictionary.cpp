@@ -203,7 +203,7 @@ string lower(string a);
 string removeSpace(string a);
 void fixSpaces();
 
-/*
+
 int main(){ 
     readWords("dictionary.txt");
     bool test = false;
@@ -268,7 +268,7 @@ int main(){
     gameLoop();
     return 0;
 }
-*/
+
 
 
 void readWords(string filename){
