@@ -95,8 +95,8 @@ int main() {
 	// for example we copy its contents into a new array
 	int out[MAX_H*2][MAX_W*2];
 
-	for(int row = 0; row < h; row++) {
-		for(int col = 0; col < w; col++) {
+	for(int row = 0; row < h*2; row++) {
+		for(int col = 0; col < w*2; col++) {
 			out[row][col] = img[row/2][col/2];//not done
 		}
 	}
