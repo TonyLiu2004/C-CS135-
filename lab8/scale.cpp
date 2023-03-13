@@ -2,9 +2,9 @@
 Author: Tony Liu
 Course: CSCI-135
 Instructor: Genady Maryash
-Assignment: Lab 8 A 
+Assignment: Lab 8 E
 
-Inverts the color of the entire image
+Scales the image 200%
 **/
 #include <iostream>
 #include <cassert>
@@ -97,7 +97,7 @@ int main() {
 
 	for(int row = 0; row < h; row++) {
 		for(int col = 0; col < w; col++) {
-			out[row][col] = abs(255- img[row][col]);
+			out[row][col] = img[row][col];//not done
 		}
 	}
 
