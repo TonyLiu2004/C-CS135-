@@ -97,7 +97,7 @@ int main() {
 
 	for(int row = 0; row < h; row++) {
 		for(int col = 0; col < w; col++) {
-            if( ((col== int(w*0.75))) && ((row == int(h*0.75)) && (row==int(h*0.25)))){
+            if( ((col== int(w*0.75))) && ((row < int(h*0.75)) && (row>int(h*0.25)))){
             /*if( ((row == int(h/4)) && ((col > w/4) && (col < int(w*0.75)))) || // top
                 ((row == int(h*0.75)) && ((col > w/4) && (col < int(w*0.75)))) ){ //bottom*/
                 out[row][col] = 255;
