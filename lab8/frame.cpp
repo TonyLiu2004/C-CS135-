@@ -2,7 +2,7 @@
 Author: Tony Liu
 Course: CSCI-135
 Instructor: Genady Maryash
-Assignment: Lab 8 C 
+Assignment: Lab 8 D
 
 Creates a frame directly in the center of the image that is 50% of the image size
 **/
