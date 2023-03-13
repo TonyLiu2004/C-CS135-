@@ -102,6 +102,6 @@ int main() {
 	}
 
 	// and save this new image to file "outImage.pgm"
-	writeImage(out, h, w);
+	writeImage(out, h*2, w*2);
 
 }
