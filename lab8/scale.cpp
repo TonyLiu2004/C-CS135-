@@ -97,11 +97,12 @@ int main() {
 
 	for(int row = 0; row < h*2; row++) {
 		for(int col = 0; col < w*2; col++) {
-			out[row][col] = img[row/2][col/2];//not done
+			out[row][col] = img[row/2][col/2];
 		}
 	}
 
 	// and save this new image to file "outImage.pgm"
+	cout << h;
 	writeImage(out, h*2, w*2);
 
 }
