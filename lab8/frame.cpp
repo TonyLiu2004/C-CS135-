@@ -98,7 +98,7 @@ int main() {
 	for(int row = 0; row < h; row++) {
 		for(int col = 0; col < w; col++) {
             //if( ((row == int(h*0.75)) || (col== int(w*0.75))) || ((row == h/4) || (col == w/4)) ){
-            if( ((row == int(h*0.75)) && ((col > w/4) || (col < int(w*0.75)))) ){
+            if( ((row == int(h*0.75)) && ((col > w/4) && (col < int(w*0.75)))) ){
                 out[row][col] = 255;
             }else{
                 out[row][col] = img[row][col];
