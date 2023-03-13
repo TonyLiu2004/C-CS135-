@@ -102,7 +102,6 @@ int main() {
 	}
 
 	// and save this new image to file "outImage.pgm"
-	cout << h;
 	writeImage(out, h*2, w*2);
 
 }
