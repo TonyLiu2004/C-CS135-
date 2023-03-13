@@ -4,7 +4,7 @@ Course: CSCI-135
 Instructor: Genady Maryash
 Assignment: Lab 8 E
 
-Scales the image 200%
+Scales the image 200% size
 **/
 #include <iostream>
 #include <cassert>
