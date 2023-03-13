@@ -1,3 +1,11 @@
+/**
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Lab 8 C 
+
+Creates a box directly in the center of the image that is 50% of the image size
+**/
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
@@ -72,25 +80,6 @@ void writeImage(int image[MAX_H][MAX_W], int height, int width) {
 	ostr.close();
 	return;
 }
-/**
-int main(){
-    std::string input = "inImage.pgm";
-    int img[MAX_H][MAX_W];
-    int h, w;
-    readImage(input, img, h, w);
-
-    int out[MAX_H][MAX_W];
-    for(int row = 0; row < h; row++) {
-        for(int col = 0; col < w; col++) {
-            out[row][col] = abs(255 - img[row][col]);
-        }
-    }
-    
-    // and save this new image to file "outImage.pgm"
-    writeImage("outImage.pgm",out, h, w);
-    return 0;
-}
-**/
 
 int main() {
 

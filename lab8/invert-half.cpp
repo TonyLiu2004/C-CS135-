@@ -1,3 +1,11 @@
+/**
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Lab 8 B 
+
+Inverts the color of only the right half of the image
+**/
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
