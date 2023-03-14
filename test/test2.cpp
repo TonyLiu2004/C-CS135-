@@ -43,7 +43,7 @@ int getLocation(char a){
 }
 
 //distance formula is  sqrt(  (PhraseFreqA - EngFreqA)^2 + (Phrase FreqB - EngFreB)^2... etc)
-double dist(vector<int> count){
+double dist(vector<double> count){
     vector<double> freq ={8.2,1.5,2.8,4.3,13,2.2,2,6.1,7,0.15,0.77,4,2.4,6.7,7.5,1.9,0.095,6,6.3,9.1,2.8,0.98,2.4,0.15,2,0.074};
     double sum = 0;
     int i = 0;
@@ -55,8 +55,8 @@ double dist(vector<int> count){
 }
 
 //returns a vector with the frequency of each of the 26 letters of the alphabet in order
-vector<int> letterFreq(string a){
-    vector<int> count(26,0);
+vector<double> letterFreq(string a){
+    vector<double> count(26,0);
     for(char x : a){
         if(isalpha(x)){
             count[getLocation(tolower(x))] +=1;
@@ -68,10 +68,9 @@ vector<int> letterFreq(string a){
 std::string solve(std::string encrypted_string){
     string ret = "";
     double sDistance = 100;
-    int turn = 0;
     for(int i =0;i <= 25;i++){
         string r = encryptCaesar(encrypted_string,i);
-        vector<int> letterCount = letterFreq(r);
+        vector<double> letterCount = letterFreq(r);
         double distance = dist(letterCount);
         cout << i << " " << distance << endl;
         if(distance < sDistance){
@@ -79,6 +78,7 @@ std::string solve(std::string encrypted_string){
             ret = encryptCaesar(encrypted_string,i);
         }
     }
+    cout << sDistance << endl;
     return ret;
 }
 
