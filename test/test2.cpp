@@ -72,18 +72,16 @@ std::string solve(std::string encrypted_string){
         string r = encryptCaesar(encrypted_string,i);
         vector<double> letterCount = letterFreq(r);
         double distance = dist(letterCount);
-        cout << i << " " << distance << endl;
         if(distance < sDistance){
             sDistance = distance;
             ret = encryptCaesar(encrypted_string,i);
         }
     }
-    cout << sDistance << endl;
     return ret;
 }
 
 int main(){
-    string s = "hello world";
+    string s = "Why must there be two buns in the same sandwich?";
     string e = encryptCaesar(s,1);
     cout << e << endl << endl;
     cout << solve(e); // doesnt deal with caps and non-letters yet, fix
