@@ -59,7 +59,7 @@ vector<int> letterFreq(string a){
     vector<int> count(26,0);
     for(char x : a){
         if(isalpha(x)){
-            count[getLocation(x)] +=1;
+            count[getLocation(tolower(x))] +=1;
         }
     }
     return count;
@@ -67,11 +67,13 @@ vector<int> letterFreq(string a){
 
 std::string solve(std::string encrypted_string){
     string ret = "";
-    int sDistance = 100;
-    for(int i =0;i < 25;i++){
+    double sDistance = 100;
+    int turn = 0;
+    for(int i =0;i <= 25;i++){
         string r = encryptCaesar(encrypted_string,i);
         vector<int> letterCount = letterFreq(r);
         double distance = dist(letterCount);
+        cout << i << " " << distance << endl;
         if(distance < sDistance){
             sDistance = distance;
             ret = encryptCaesar(encrypted_string,i);
@@ -81,9 +83,10 @@ std::string solve(std::string encrypted_string){
 }
 
 int main(){
-    string s = "Hello, World!";
+    string s = "hello world";
     string e = encryptCaesar(s,1);
-    cout << e << endl;
-    cout << solve("i love eating cookies"); // doesnt deal with caps and non-letters yet, fix
+    cout << e << endl << endl;
+    cout << solve(e); // doesnt deal with caps and non-letters yet, fix
+    //cout << encryptCaesar(e,25);
     return 0;
 }
