@@ -105,7 +105,9 @@ int main() {
             if((f > 255) || (f< -255)){
                 f = 255;
             }
+            out[row+1][col] = abs(f);
             out[row+1][col+1] = abs(f);
+            out[row+1][col+2] = abs(f);
 		}
 	}
 
