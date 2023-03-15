@@ -129,9 +129,6 @@ int main() {
 	for(int row = 0; row < h; row++) {
 		for(int col = 0; col < w; col++) {
             int f = func(img[row][col],img[row][col+1],img[row][col+2],img[row+1][col],img[row+1][col+1],img[row+1][col+2],img[row+2][col],img[row+2][col+1],img[row+2][col+2]);
-            if((f > 255) || (f< -255)){
-                f = 255;
-            }
             out[row][col] = abs(f);
 		}
 	}
