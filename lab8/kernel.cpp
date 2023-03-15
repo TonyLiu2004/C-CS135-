@@ -99,7 +99,8 @@ int main() {
 		for(int col = 0; col < w; col+=3) {
             //for {{a,b,c},{d,e,f},{g,h,i}} , f(a,b,c,d,e,f,g,h,i) = (g+2h+i)-(a+2b+c) ==> Edge Detection
             int f = (img[row+2][col] + (2*img[row+2][col+1]) + img[row+2][col+2]) - (img[row][col] + (2 * img[row][col+1] + img[row][col+2]));
-			out[row+1][col+1] = f;
+			cout << f << endl;
+            //out[row+1][col+1] = f;
 		}
 	}
 
