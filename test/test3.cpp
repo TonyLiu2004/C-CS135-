@@ -3,6 +3,7 @@
 using namespace std;
 
 int func(int a, int b, int c, int d, int e, int f, int g, int h, int i){
+    cout << "c: " << c << endl;
     /**
     if(a > 255){
         a = 255;
@@ -68,23 +69,19 @@ int main(){
     int img[r][c] = {{6,12,18},
                    {11,22,33},
                    {15,30,45}};
+    int temp[r][c];
     for(int row =0;row < r;row++){
         for(int col = 0;col < c;col++){
-            int f = func(img[row][col],img[row][col+1],img[row][col+2],img[row+1][col],img[row+1][col+1],img[row+1][col+2],img[row+2][col],img[row+2][col+1],img[row+2][col+2]);
-            cout << img[row][col] << endl;
-            cout << img[row][col+1] << endl;
-            cout << img[row][col+2] << endl;
-            cout << img[row+1][col] << endl;
-            cout <<endl <<endl;
-            /*if(f < 0){
-                f = 0;
-            }else if(f > 255){
-                f = 255;
-            }*/
-            cout << f << " ";
+            int f = func(img[row-1][col-1],img[row-1][col],img[row-1][col+1],img[row][col-1],img[row][col],img[row][col+1],img[row+1][col-1],img[row+1][col],img[row+1][col+1]);
+            temp[row][col] = f;
         }
         cout << endl;
     }
-    cout << img[4][5];
+    for(int row =0;row < r;row++){
+        for(int col = 0;col < c;col++){
+            cout << temp[row][col] << " ";
+        }
+        cout << endl;
+    }
     return 0;
 }
