@@ -163,7 +163,7 @@ int main() {
             }else if(f > 255){
                 f = 255;
             }
-            out[row][col] = f;
+            out[row][col] = 255;//f;
 		}
 	}
 
