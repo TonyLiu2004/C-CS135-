@@ -81,6 +81,10 @@ void writeImage(int image[MAX_H][MAX_W], int height, int width) {
 	return;
 }
 
+int func(int a, int b, int c, int d, int e, int f, int g, int h, int i){
+    return ((g+(2*h)+i)-(a+(2*b)+c));
+}
+
 int main() {
 
 	int img[MAX_H][MAX_W];
@@ -97,15 +101,7 @@ int main() {
 
 	for(int row = 0; row < h; row+=3) {
 		for(int col = 0; col < w; col+=3) {
-            //for {{a,b,c},{d,e,f},{g,h,i}} , f(a,b,c,d,e,f,g,h,i) = (g+2h+i)-(a+2b+c) ==> Edge Detection
-            int f = (img[row+2][col] + (2*img[row+2][col+1]) + img[row+2][col+2]) - (img[row][col] + (2 * img[row][col+1] + img[row][col+2]));
-			//cout << abs(f) << endl;
-            if(f < 0){
-                f = abs(f);
-            }
-            if(f > 255){
-                f = 255;
-            }
+            int f = func(img[row][col],img[row][col+1],img[row][col+2],img[row+1][col],img[row+1][col+1],img[row+1][col+2],img[row+2][col],img[row+2][col+1],img[row+2][col+2]);
             out[row+1][col+1] = abs(f);
 		}
 	}
