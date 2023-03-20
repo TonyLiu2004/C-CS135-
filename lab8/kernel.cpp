@@ -82,35 +82,6 @@ void writeImage(int image[MAX_H][MAX_W], int height, int width) {
 }
 
 int func(int a, int b, int c, int d, int e, int f, int g, int h, int i){
-    /**
-    if(a > 255){
-        a = 255;
-    }
-    if(b > 255){
-        b = 255;
-    }
-    if(c > 255){
-        c = 255;
-    }
-    if(d > 255){
-        d = 255;
-    }
-    if(e > 255){
-        e = 255;
-    }
-    if(f > 255){
-        f = 255;
-    }
-    if(g > 255){
-        g = 255;
-    }
-    if(h > 255){
-        h = 255;
-    }
-    if(i > 255){
-        i = 255;
-    }
-    **/
     if(a > 255){
         a = 0;
     }
