@@ -18,23 +18,27 @@ int main(){
     string a;
     ifstream myfile;
     myfile.open ("test.txt");
-    while(getline(myfile,a)){
-        bool close = false;
-        a=removeLeadingSpaces(a);
-        if(a[0] == '}'){
-            close = true;
-            open_brackets -= 1;
-        }
-        for(int i = 0 ; i < open_brackets; i++){
-            cout <<"\t";
-        }
-        cout<<a<<"\n";
-        open_brackets += countChar(a,'{');
-        if(!(close)){
-            open_brackets -= countChar(a,'}');
-        }
-        cout << open_brackets;
+    string str;
+  int indents = 0;
+  while(getline(myfile, str)){ //read cin
+    bool close = false;
+    string line = removeLeadingSpaces(str); 
+    if (line[0] == '}'){ //if its close bracket, then indents -1
+      indents--;
+      close = true;
     }
+    for (int i = 0; i < indents; i++){
+      cout << "\t"; //indent how many indents there are
+    }
+    cout << line << endl;
+
+    indents += countChar(str, '{'); //if its open bracket + 1 prob
+    if(!(close)){
+      indents -= countChar(str,'}');
+    }
+        cout  << indents;
+  }
+  return 0;
 }
 int countChar(string line, char c){
     int i = 0;

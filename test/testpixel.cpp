@@ -1,24 +1,15 @@
-/**
-Author: Tony Liu
-Course: CSCI-135
-Instructor: Genady Maryash
-Assignment: Lab 8 F
-
-Pixelates the image
-**/
 #include <iostream>
 #include <cassert>
 #include <cstdlib>
 #include <fstream>
 #include <cmath>
 
+
 using namespace std;
 
 const int MAX_H = 512;
 const int MAX_W = 512;
 
-// Reads a PGM file.
-// Notice that: height and width are passed by reference!
 void readImage(int image[MAX_H][MAX_W], int &height, int &width) {
 	char c;
 	int x;
@@ -81,31 +72,27 @@ void writeImage(int image[MAX_H][MAX_W], int height, int width) {
 	ostr.close();
 	return;
 }
+void pixelate(std::string fileimg) {
+    int height; 
+    int width; 
+    int image[MAX_H][MAX_W];
+    int average;
 
-int main() {
-	int img[MAX_H][MAX_W];
-	int h, w;
+    readImage(image, height, width);
 
-	readImage(img, h, w); // read it from the file "inImage.pgm"
-	// h and w were passed by reference and
-	// now contain the dimensions of the picture
-	// and the 2-dimesional array img contains the image data
+    for(int i = 0;i < height; i+=2){
+        for(int j = 0;j < width;j+=2){
+            average = round(((image[i][j] + image[i+1][j] + image[i][j+1] + image[i+1][j+1]) / 4) + 0.5);
+            image[i][j] = average;
+            image[i + 1][j] = average;
+            image[i][j + 1] = average;
+            image[i + 1][j + 1] = average;
+        }
+    }
 
-	// Now we can manipulate the image the way we like
-	// for example we copy its contents into a new array
-	int out[MAX_H][MAX_W];
-	for(int row = 0; row < h; row+=2) {
-		for(int col = 0; col < w; col+=2) {
-            int rounded = round((img[row][col] + img[row+1][col] + img[row][col+1] + img[row+1][col+1])/4 +0.5);
-			out[row][col] = rounded;
-            out[row+1][col] = rounded;
-            out[row][col+1] = rounded;
-            out[row+1][col+1] = rounded;
-			cout << rounded << endl;
-		}
-	}
+    writeImage(image, height, width);
+}
 
-	// and save this new image to file "outImage.pgm"
-	writeImage(out, h, w);
-
+int main(){
+    pixelate("inImage.pgm");
 }
