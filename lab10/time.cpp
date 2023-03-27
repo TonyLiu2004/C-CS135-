@@ -38,13 +38,16 @@ void printMovie(Movie mv){
     }
     cout << mv.title << " " << g << " (" << mv.duration << " min)";
 }
-
+void printTimeSlot(TimeSlot ts);
 int minutesSinceMidnight(Time time);
 int minutesUntil(Time earlier, Time later);
 Time addMinutes(Time time0, int min);
+TimeSlot scheduleAfter(TimeSlot ts, Movie nextMovie);
+bool timeOverlap(TimeSlot ts1, TimeSlot ts2); 
+TimeSlot earlierStart(TimeSlot ts1,TimeSlot ts2);
 
 int main(){
-    /*
+    /* task A testing
     int h1;
     int m1;
     int h2;
@@ -68,11 +71,35 @@ int main(){
     */
     Movie movie1 = {"Back to the Future", COMEDY, 116};
     Movie movie2 = {"Black Panther", ACTION, 134};
+    Movie movie3 = {"Julius Caesar",ROMANCE,90};
+    Movie movie4 = {"Never gonna give you up", ROMANCE,90};
+    Movie bananas = {"bananas", ACTION, 130};
 
+    TimeSlot testing = {bananas,{14,10}};
     TimeSlot morning = {movie1, {9, 15}};  
     TimeSlot daytime = {movie2, {12, 15}}; 
-    TimeSlot evening = {movie2, {16, 45}}; 
-    printMovie(movie1);
+    TimeSlot evening = {movie2, {16, 45}};
+    TimeSlot late1 = {movie3,{10,10}}; 
+    TimeSlot late2 = {movie4,{11,30}};
+
+    cout << timeOverlap(late1,late2) << endl; 
+    //TimeSlot testEarly = earlierStart(testing, daytime);
+    //printTimeSlot(testEarly);
+
+    //printMovie(movie1);
+    /* testing print time slot
+    cout << "\n";
+    printTimeSlot(morning);
+    printTimeSlot(daytime);
+    printTimeSlot(evening);
+    printTimeSlot(late1);
+    printTimeSlot(late2);
+    */
+
+    /*
+    TimeSlot t1 = scheduleAfter(testing,bananas);
+    printTimeSlot(t1);
+    */
     return 0;
 }
 
@@ -84,16 +111,68 @@ int minutesUntil(Time earlier, Time later){
 }
 
 Time addMinutes(Time time0, int min){
-    int minutes = min%60; // 
-    int hours = min/60;
-    time0.h +=hours;
-    time0.m +=minutes;
-    if(time0.m == 60){
-        time0.m = 0;
-        time0.h++;
+    int minutes = time0.m + min; 
+    int hours = time0.h;
+    if(minutes >=60){
+        hours += minutes/60;
+        minutes = minutes%60;
     }
-    if(time0.h == 25){
-        time0.h = 0;
+    if(hours > 24){
+        hours = 0;
     }
-    return {time0.h,time0.m};
+    return {hours,minutes};
+}
+
+void printTimeSlot(TimeSlot ts){
+    string g;
+    switch (ts.movie.genre) { // g becomes the genre
+        case ACTION   : g = "ACTION"; break;
+        case COMEDY   : g = "COMEDY"; break;
+        case DRAMA    : g = "DRAMA";  break;
+        case ROMANCE  : g = "ROMANCE"; break;
+        case THRILLER : g = "THRILLER"; break;
+    }
+    Time end = addMinutes(ts.startTime,ts.movie.duration); // the ending time for the movie
+    cout << ts.movie.title << " " << g << " (" << ts.movie.duration << "min) [starts at " << ts.startTime.h << ":" << ts.startTime.m << ", ends by " << end.h << ":" << end.m << "]\n";;
+}
+
+//makes a new timeslot for nextMovie, scheduled right after the timeslot ts
+TimeSlot scheduleAfter(TimeSlot ts, Movie nextMovie){
+    TimeSlot ret = {nextMovie,addMinutes(ts.startTime,ts.movie.duration)};
+    return ret;
+}
+
+TimeSlot earlierStart(TimeSlot ts1,TimeSlot ts2){
+    Time startTime1 = ts1.startTime;
+    Time startTime2 = ts2.startTime; 
+    if((startTime1.h == startTime2.h) && (startTime1.m < startTime2.m)){
+        return ts1;
+    }else if(startTime1.h < startTime2.h){
+        return ts1;
+    }
+    return ts2;
+}
+
+TimeSlot laterStart(TimeSlot ts1,TimeSlot ts2){
+    Time startTime1 = ts1.startTime;
+    Time startTime2 = ts2.startTime; 
+    if((startTime1.h == startTime2.h) && (startTime1.m < startTime2.m)){
+        return ts2;
+    }else if(startTime1.h < startTime2.h){
+        return ts2;
+    }
+    return ts1;
+}
+
+bool timeOverlap(TimeSlot ts1, TimeSlot ts2){
+    Time startTime1 = ts1.startTime;
+    Time startTime2 = ts2.startTime;
+    TimeSlot earlier = earlierStart(ts1,ts2);
+    TimeSlot later = laterStart(ts1,ts2);
+
+    int between = minutesUntil(earlier.startTime,later.startTime);
+    if(between < earlier.movie.duration){
+        return true;
+    }
+    return false;
 }

@@ -2,7 +2,7 @@
 Author: Tony Liu
 Course: CSCI-135
 Instructor: Genady Maryash
-Assignment: Lab 7 A 
+Assignment: Lab 7 B 
 
 Reads input from cin and prints each line with proper indents based on curly brackets
 **/
