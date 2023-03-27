@@ -22,7 +22,6 @@ int main(){
         bool close = false;
         a=removeLeadingSpaces(a);
         if(a[0] == '}'){
-            close = true;
             open_brackets -= 1;
         }
         for(int i = 0 ; i < open_brackets; i++){
@@ -30,10 +29,6 @@ int main(){
         }
         cout<<a<<"\n";
         open_brackets += countChar(a,'{');
-        if(!(close)){
-            open_brackets -= countChar(a,'}');
-        }
-        cout << open_brackets;
     }
 }
 int countChar(string line, char c){

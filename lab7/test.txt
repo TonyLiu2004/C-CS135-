@@ -1,0 +1,21 @@
+int main()
+    {
+//Hi, I'm a program!
+    int x = 1; 
+    for(int i = 0; i < 10; i++) {
+cout << i;
+    cout << endl;
+    }
+    }
+    class { } <---- idk
+    void input()
+    {
+        cout << "do stuff idk";
+    }
+
+    Complex stuff(){
+        cout << "?";
+    }
+void dostuff(int a){
+    cout << "Doing stuff" << endl;
+}
