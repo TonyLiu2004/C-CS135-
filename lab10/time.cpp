@@ -60,6 +60,9 @@ int main(){
     Time t2 = {h2,m2};
     cout << minutesSinceMidnight(t1) << endl;
     cout << minutesUntil(t1,t2) << endl;
+    cout << minutesUntil({9,2},{1,39}) << endl;
+    cout <<   minutesUntil({7,20}, {7, 55}) << endl;
+    cout <<   minutesUntil({0,41}, {15, 4}) << endl;
     
     //testing addMinutes
     Time t3 = {8,10};
@@ -83,6 +86,7 @@ int main(){
     TimeSlot late2 = {movie4,{11,30}};
 
     cout << timeOverlap(late1,late2) << endl; 
+
     //TimeSlot testEarly = earlierStart(testing, daytime);
     //printTimeSlot(testEarly);
 
@@ -107,6 +111,17 @@ int minutesSinceMidnight(Time time){
     return (time.h * 60) + time.m;
 }
 int minutesUntil(Time earlier, Time later){
+    // if earlier's time is more late than later
+    if((later.h < earlier.h) || ((later.h <= earlier.h) && (later.m < earlier.m))){
+        return (((later.h - earlier.h) * 60) + (later.m - earlier.m));
+    }
+    //if earlier's minute is greater than later's minute,
+    //substracting them won't work -> 1:41 to 2:04 != hour(2-1)  : minute(abs(4-41)), you get 1 hour 37 mins inbetween
+    //Adds 1 hour to earlier.h but earlier.m subtracts 60 and gets added to later.m
+    //ex: 2:41 to 3:04, hours(3 - (2+1)), minutes((60-41) + 4) -> 0 hours 23 mins
+    if(earlier.m > later.m){
+        return (abs((earlier.h+1) - later.h) * 60) + abs(later.m + abs(earlier.m-60));
+    }
     return (abs(earlier.h - later.h) * 60) + abs(earlier.m - later.m);
 }
 
