@@ -1,5 +1,18 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 2
+
+allocateNew() dynamically creates more space in the global arrays if it needs more space.
+
+readeSongs reads from songs.txt and populates the global arrays accordingly
+*/
+
 #include <iostream>
 #include <fstream>
+#include <string>
+
 using namespace std;
 
 int g_curr_size = 2;
@@ -40,8 +53,25 @@ void allocateNew();
 */
 void readSongs(string filename);
 
+
+//returns only the integers from a string
+int numbersFromString(string input){
+    string ret = "";
+    for(char x : input){
+        if((x-'0') < 10){ // x is a char, x minus char '0' will be the the integer value of the character. If this value is greater than 9, then it is not an integer
+            ret+= to_string(x - '0'); //appends the integer value as a string to ret
+        }
+    }
+    int n = stoi(ret);
+    return n;
+}
+
+
 int main(){
     readSongs("songs.txt");
+    for(int i = 0;i < g_number_of_songs;i++){
+        cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
+    }
     return 0;
 }
 
@@ -83,7 +113,8 @@ void readSongs(string filename){
     string artist;
     int duration;
     string genre;
-    int count = 0;
+
+    int count = 0; // counting index to update global arrays
     string line;
 
     while(getline(fin,line)){
@@ -93,12 +124,17 @@ void readSongs(string filename){
 
         string tempLine = line;
         g_song_names[count] = tempLine.substr(0,line.find(":")); //finds the song name which is from index 0 to the first :
-        tempLine = tempLine.substr(line.find(":")+1); // removes the song name and : from tempLine
+        tempLine = tempLine.substr(tempLine.find(":")+1); // removes the song name and : from tempLine
         
-        g_artist_names[count] = tempLine.substr(0,tempLine.find("-"));
-        // g_genres[count] = genre;
-        // g_song_durations[count] = duration;
-        count++;
+        g_artist_names[count] = tempLine.substr(0,tempLine.find("-")); //finds the artist name from index 0 to the first -
+        tempLine = tempLine.substr(tempLine.find("-")+1); //removes the artist name and : 
+        
+        g_genres[count] = tempLine.substr(0,tempLine.find("-")); // finds the genre from index 0 to final -
+        tempLine = tempLine.substr(tempLine.find("-")+1); //removes the genre and :
+
+        g_song_durations[count] = numbersFromString(tempLine); //gets only the numbers from the remaining text
+
+        count++; 
         g_number_of_songs++;
     }
 }
