@@ -47,23 +47,17 @@ bool timeOverlap(TimeSlot ts1, TimeSlot ts2);
 TimeSlot earlierStart(TimeSlot ts1,TimeSlot ts2);
 
 int main(){
-    /* task A testing
-    int h1;
-    int m1;
-    int h2;
-    int m2;
-    cout << "first time: ";
-    cin >> h1 >> m1;
-    cout << "second time: ";
-    cin >> h2 >> m2;
-    Time t1 = {h1,m1};
-    Time t2 = {h2,m2};
+    /*
+    Time t1 = {2,10};
+    Time t2 = {7,50};
     cout << minutesSinceMidnight(t1) << endl;
+    cout << minutesSinceMidnight(t2) << endl;
     cout << minutesUntil(t1,t2) << endl;
     cout << minutesUntil({9,2},{1,39}) << endl;
     cout <<   minutesUntil({7,20}, {7, 55}) << endl;
     cout <<   minutesUntil({0,41}, {15, 4}) << endl;
-    
+    */
+    /*
     //testing addMinutes
     Time t3 = {8,10};
     Time t4 = addMinutes(t3,75); 
@@ -72,6 +66,7 @@ int main(){
     cout << t4.h << " " << t4.m << endl;
     cout << t6.h << " " << t6.m << endl;
     */
+    
     Movie movie1 = {"Back to the Future", COMEDY, 116};
     Movie movie2 = {"Black Panther", ACTION, 134};
     Movie movie3 = {"Julius Caesar",ROMANCE,90};
@@ -88,7 +83,7 @@ int main(){
     cout << timeOverlap(late1,late2) << endl; 
 
     //TimeSlot testEarly = earlierStart(testing, daytime);
-    //printTimeSlot(testEarly);
+    //printTimeSlot(testing);
 
     //printMovie(movie1);
     /* testing print time slot
@@ -100,10 +95,10 @@ int main(){
     printTimeSlot(late2);
     */
 
-    /*
-    TimeSlot t1 = scheduleAfter(testing,bananas);
+    
+    TimeSlot t1 = scheduleAfter(testing,movie4);
     printTimeSlot(t1);
-    */
+    
     return 0;
 }
 
