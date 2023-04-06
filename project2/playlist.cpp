@@ -53,6 +53,34 @@ void allocateNew();
 */
 void readSongs(string filename);
 
+/*
+    @param genre              :   A string representing a genre
+    @param(&) genreCount      :   An integer that will keep track of the number of songs
+    @return                   :   A pointer to a dynamically allocated array of strings 
+    @post                     :   Return a pointer to a dynamically allocated array of strings
+                                  containing the names of the songs of given 'genre' and 
+                                  update 'genreCount' to be the number of songs found.
+                                  Return a pointer to an empty dynamically allocated array
+                                  if no songs are found of the given 'genre'
+    
+    For example : Let's say we have the following 'g_song_names':
+                  ["Killshot", "Takeover", "Spectre", "Ether", "No Title"]
+                  
+                  Let's say we have the following 'g_genres':
+                  ["HipHop", "HipHop", "EDM", "HipHop", "JPop"]
+                  
+                  We try the following code with the above global-arrays:
+                  int main(){
+                    int count = 0;
+                    string * genreSongs = getGenreSongs("HipHop", count);
+                  }
+
+                  In this case, 'genreSongs' will be pointing to the following:
+                  ["Killshot", "Takeover", "Ether"]
+                  The value of 'count' will be updated to 3 because there
+                  are three "HipHop" songs on the playlist 
+*/
+string * getGenreSongs(string genre, int &genreCount);
 
 //returns only the integers from a string
 int numbersFromString(string input){
@@ -69,9 +97,17 @@ int numbersFromString(string input){
 
 int main(){
     readSongs("songs.txt");
-    for(int i = 0;i < g_number_of_songs;i++){
-        cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
-    }
+
+    //testing task A
+    // for(int i = 0;i < g_number_of_songs;i++){
+    //     cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
+    // }
+
+    //getGenreSongs
+    int count = 0;
+    string * genreSongs = getGenreSongs("Hiphop", count);
+    // *(genreSongs+1) will get the next song with the inputted genre
+    cout << *(genreSongs+0) << " " << count << endl;
     return 0;
 }
 
@@ -137,4 +173,27 @@ void readSongs(string filename){
         count++; 
         g_number_of_songs++;
     }
+}
+
+string * getGenreSongs(string genre, int &genreCount){
+    string *genreSongs = new string[0];
+    int genreSongsSize = 0;
+    int songsCount = 0;
+    for(int i = 0;i < g_number_of_songs; i++){
+        if(g_genres[i] == genre){
+            songsCount++;
+            if(genreSongsSize < songsCount){ //dynamically increases the size of genreSongs array when more songs of the specified genre are found
+                string *temp = new string[genreSongsSize+1];
+                for(int i = 0;i < genreSongsSize;i++){ // copies whatevers in genreSongs into temp
+                    temp[i] = genreSongs[i];
+                }
+                genreSongsSize++;
+                delete[] genreSongs;
+                genreSongs = temp;
+            }
+            genreSongs[genreSongsSize-1] = g_song_names[i];
+        }
+    }
+    genreCount = songsCount;
+    return genreSongs;
 }
