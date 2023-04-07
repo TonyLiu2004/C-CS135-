@@ -23,63 +23,8 @@ string *g_artist_names = new string[g_curr_size];
 int *g_song_durations = new int[g_curr_size];
 string *g_genres = new string[g_curr_size];
 
-/*
-    @post             :   Replace the old global
-                          dynamically allocated arrays
-                          with new dynamically allocated
-                          arrays of twice the size 
-                          ('g_curr_size' * 2). Update
-                          'g_curr_size' accordingly.
-                          Make sure you copy the contents
-                          of the older arrays. Do this
-                          for the following global-arrays:
-                          'g_song_names', 'g_artist_names', 
-                          'g_song_durations', 'g_genres'
-*/
 void allocateNew();
-
-
-/*
-    @param            :   The string with the 'filename'
-    @post             :   Reads the song, artists,
-                          song durations and genres into 
-                          the global-arrays and set the 
-                          value of 'g_number_of_songs'
-                          to the number of songs read.
-                          Call 'allocateNew()' to allocate 
-                          an array of larger size if the 
-                          dynamic arrays reach full 
-                          capacity.
-*/
 void readSongs(string filename);
-
-/*
-    @param genre              :   A string representing a genre
-    @param(&) genreCount      :   An integer that will keep track of the number of songs
-    @return                   :   A pointer to a dynamically allocated array of strings 
-    @post                     :   Return a pointer to a dynamically allocated array of strings
-                                  containing the names of the songs of given 'genre' and 
-                                  update 'genreCount' to be the number of songs found.
-                                  Return a pointer to an empty dynamically allocated array
-                                  if no songs are found of the given 'genre'
-    
-    For example : Let's say we have the following 'g_song_names':
-                  ["Killshot", "Takeover", "Spectre", "Ether", "No Title"]
-                  
-                  Let's say we have the following 'g_genres':
-                  ["HipHop", "HipHop", "EDM", "HipHop", "JPop"]
-                  
-                  We try the following code with the above global-arrays:
-                  int main(){
-                    int count = 0;
-                    string * genreSongs = getGenreSongs("HipHop", count);
-                  }
-
-                  In this case, 'genreSongs' will be pointing to the following:
-                  ["Killshot", "Takeover", "Ether"]
-                  The value of 'count' will be updated to 3 because there
-                  are three "HipHop" songs on the playlist 
-*/
 string * getGenreSongs(string genre, int &genreCount);
 
 //returns only the integers from a string
@@ -94,14 +39,17 @@ int numbersFromString(string input){
     return n;
 }
 
+string * getSongsFromDuration(int duration, int &durationsCount, int filter);
+string * getUniqueArtists(int &uniqueCount);
+string getFavoriteArtist();
 
 int main(){
     readSongs("songs.txt");
 
     //testing task A
-    // for(int i = 0;i < g_number_of_songs;i++){
-    //     cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
-    // }
+    for(int i = 0;i < g_number_of_songs;i++){
+        cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
+    }
 
     //getGenreSongs
     int count = 0;
@@ -157,8 +105,11 @@ void readSongs(string filename){
         if(g_number_of_songs >= g_curr_size){
             allocateNew();
         }
-
+        
         string tempLine = line;
+        if(line == ""){ //if its an empty line, skip
+            continue;
+        }
         g_song_names[count] = tempLine.substr(0,line.find(":")); //finds the song name which is from index 0 to the first :
         tempLine = tempLine.substr(tempLine.find(":")+1); // removes the song name and : from tempLine
         
@@ -197,3 +148,94 @@ string * getGenreSongs(string genre, int &genreCount){
     genreCount = songsCount;
     return genreSongs;
 }
+
+string * getSongsFromDuration(int duration, int &durationsCount, int filter){
+	int d = 0;
+	for(int i =0; i<g_number_of_songs;i++){
+		if(filter == 2 && duration == g_song_durations[i]){
+			
+			d++;
+		}
+		if(filter == 1 && duration > g_song_durations[i]){
+			
+			d++;
+		}
+		if(filter == 0 && duration < g_song_durations[i]){
+			cout<<g_song_durations[i];
+		
+			d++;
+		}
+	}
+	durationsCount =d;
+	string *p = new string[d];
+	int j =0;
+	for(int i =0; i<g_number_of_songs;i++){
+		if(filter == 2 && duration == g_song_durations[i]){
+			p[j] = g_song_names[i];
+			j++;
+		}
+		if(filter == 1 && duration > g_song_durations[i]){
+			p[j] = g_song_names[i];
+			j++;
+		}
+		if(filter == 0 && duration < g_song_durations[i]){
+			p[j] = g_song_names[i];
+			j++;
+		}
+		
+	}
+	return p;
+
+}
+
+string * getUniqueArtists(int &uniqueCount){
+	int a =0;
+	for(int i = 0; i < g_number_of_songs;i++){
+		int j;
+		for(j = 0; j < i;j++){
+			if(g_artist_names[i]== g_artist_names[j]){
+				break;
+			}
+		}
+		if(j ==i){
+			a++;
+		}
+	}
+	string *p = new string[a];
+	int o=0;
+	for(int i = 0; i < g_number_of_songs;i++){
+		int j;
+		for(j = 0; j < i;j++){
+			if(g_artist_names[i]== g_artist_names[j]){
+				break;
+			}
+		}
+		if(j ==i){
+			p[o] = g_artist_names[i];
+			o++;
+		}
+	}
+	uniqueCount = a;
+	return p;
+
+
+}
+string getFavoriteArtist(){
+	int maxCount = 0;
+	string favArt = "NONE";
+	for( int i = 0; i <g_number_of_songs;i++){
+		int count = 0;
+		for(int j =0;j<g_number_of_songs;j++){
+			if(g_artist_names[i].compare(g_artist_names[j])==0){
+				count++;
+			}
+		}
+		if(maxCount < count){
+			maxCount = count;
+			favArt = g_artist_names[i];
+		}
+	}
+	return favArt;
+
+}
+
