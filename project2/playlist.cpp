@@ -47,15 +47,18 @@ int main(){
     readSongs("songs.txt");
 
     //testing task A
-    for(int i = 0;i < g_number_of_songs;i++){
-        cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
-    }
+    // for(int i = 0;i < g_number_of_songs;i++){
+    //     cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
+    // }
 
     //getGenreSongs
-    int count = 0;
-    string * genreSongs = getGenreSongs("Hiphop", count);
+    // int count = 0;
+    // string * genreSongs = getGenreSongs("Hiphop", count);
     // *(genreSongs+1) will get the next song with the inputted genre
-    cout << *(genreSongs+0) << " " << count << endl;
+    // cout << *(genreSongs+0) << " " << count << endl;
+    int countUnique = 0;
+    getUniqueArtists(countUnique);
+    cout << "Unique Artists: " << countUnique << endl;
     return 0;
 }
 
@@ -127,22 +130,12 @@ void readSongs(string filename){
 }
 
 string * getGenreSongs(string genre, int &genreCount){
-    string *genreSongs = new string[0];
-    int genreSongsSize = 0;
+    string *genreSongs = new string[g_number_of_songs];
     int songsCount = 0;
     for(int i = 0;i < g_number_of_songs; i++){
         if(g_genres[i] == genre){
+            genreSongs[songsCount] = g_song_names[i];
             songsCount++;
-            if(genreSongsSize < songsCount){ //dynamically increases the size of genreSongs array when more songs of the specified genre are found
-                string *temp = new string[genreSongsSize+1];
-                for(int i = 0;i < genreSongsSize;i++){ // copies whatevers in genreSongs into temp
-                    temp[i] = genreSongs[i];
-                }
-                genreSongsSize++;
-                delete[] genreSongs;
-                genreSongs = temp;
-            }
-            genreSongs[genreSongsSize-1] = g_song_names[i];
         }
     }
     genreCount = songsCount;
@@ -150,76 +143,48 @@ string * getGenreSongs(string genre, int &genreCount){
 }
 
 string * getSongsFromDuration(int duration, int &durationsCount, int filter){
-	int d = 0;
+    string *ret = new string[g_number_of_songs];
+	int count = 0;
 	for(int i =0; i<g_number_of_songs;i++){
 		if(filter == 2 && duration == g_song_durations[i]){
-			
-			d++;
+            ret[count] = g_song_names[i];
+			count++;
 		}
-		if(filter == 1 && duration > g_song_durations[i]){
-			
-			d++;
-		}
-		if(filter == 0 && duration < g_song_durations[i]){
-			cout<<g_song_durations[i];
-		
-			d++;
-		}
-	}
-	durationsCount =d;
-	string *p = new string[d];
-	int j =0;
-	for(int i =0; i<g_number_of_songs;i++){
-		if(filter == 2 && duration == g_song_durations[i]){
-			p[j] = g_song_names[i];
-			j++;
-		}
-		if(filter == 1 && duration > g_song_durations[i]){
-			p[j] = g_song_names[i];
-			j++;
+		if(filter == 1 && duration > g_song_durations[i]){	
+            ret[count] = g_song_names[i];
+			count++;
 		}
 		if(filter == 0 && duration < g_song_durations[i]){
-			p[j] = g_song_names[i];
-			j++;
+            ret[count] = g_song_names[i];
+			count++;
 		}
-		
 	}
-	return p;
+	durationsCount = count;
+	return ret;
 
 }
 
+//not done
 string * getUniqueArtists(int &uniqueCount){
-	int a =0;
+	string *uniqueArtists = new string[g_number_of_songs];
+	int count = 0;
 	for(int i = 0; i < g_number_of_songs;i++){
-		int j;
-		for(j = 0; j < i;j++){
-			if(g_artist_names[i]== g_artist_names[j]){
-				break;
-			}
-		}
-		if(j ==i){
-			a++;
-		}
+        bool isUnique = true;
+        for(int j = 0;j<=count;j++){
+            if(uniqueArtists[j] == g_artist_names[i]){
+                isUnique = false;
+                break;
+            }
+        }
+        if(isUnique){
+            uniqueArtists[count] = g_artist_names[i]; 
+            count++;
+        }
 	}
-	string *p = new string[a];
-	int o=0;
-	for(int i = 0; i < g_number_of_songs;i++){
-		int j;
-		for(j = 0; j < i;j++){
-			if(g_artist_names[i]== g_artist_names[j]){
-				break;
-			}
-		}
-		if(j ==i){
-			p[o] = g_artist_names[i];
-			o++;
-		}
-	}
-	uniqueCount = a;
-	return p;
-
-
+	uniqueCount = count;
+	return uniqueArtists;
 }
+
 string getFavoriteArtist(){
 	int maxCount = 0;
 	string favArt = "NONE";
