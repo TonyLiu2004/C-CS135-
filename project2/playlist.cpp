@@ -164,7 +164,7 @@ string * getSongsFromDuration(int duration, int &durationsCount, int filter){
 
 }
 
-//not done
+
 string * getUniqueArtists(int &uniqueCount){
 	string *uniqueArtists = new string[g_number_of_songs];
 	int count = 0;
