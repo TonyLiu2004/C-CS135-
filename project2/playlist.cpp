@@ -51,14 +51,26 @@ int main(){
     //     cout << g_song_names[i] << "---" << g_artist_names[i] << "---" << g_genres[i] << "---" << g_song_durations[i] << endl;
     // }
 
-    //getGenreSongs
-    // int count = 0;
-    // string * genreSongs = getGenreSongs("Hiphop", count);
-    // *(genreSongs+1) will get the next song with the inputted genre
-    // cout << *(genreSongs+0) << " " << count << endl;
-    int countUnique = 0;
-    getUniqueArtists(countUnique);
-    cout << "Unique Artists: " << countUnique << endl;
+    //testing getGenreSongs
+    // int countHip = 0;
+    // string * pHip = getGenreSongs("Hiphop",countHip);
+    // cout << "hip songs: " << countHip << endl;
+    // for(int i = 0;i < countHip;i++){
+    //     cout << pHip[i] << endl;
+    // }
+
+
+    //testing getUniqueArtists
+    // int countUnique = 0;
+    // string *uniques = getUniqueArtists(countUnique);
+    // cout << "Unique Artists: " << countUnique << endl;
+    // for(int i = 0;i < countUnique;i++){
+    //     cout << uniques[i] << endl;
+    // }
+
+
+    //testing getFavoriteArtist
+    cout << "favorite artist: " << getFavoriteArtist() << endl;
     return 0;
 }
 
@@ -170,7 +182,7 @@ string * getUniqueArtists(int &uniqueCount){
 	int count = 0;
 	for(int i = 0; i < g_number_of_songs;i++){
         bool isUnique = true;
-        for(int j = 0;j<=count;j++){
+        for(int j = 0;j<=count;j++){ // check if artist name is in uniqueArtists, if it is the artist is not unique and nothing happens
             if(uniqueArtists[j] == g_artist_names[i]){
                 isUnique = false;
                 break;
@@ -191,7 +203,7 @@ string getFavoriteArtist(){
 	for( int i = 0; i <g_number_of_songs;i++){
 		int count = 0;
 		for(int j =0;j<g_number_of_songs;j++){
-			if(g_artist_names[i].compare(g_artist_names[j])==0){
+			if(g_artist_names[i] == g_artist_names[j]){
 				count++;
 			}
 		}
