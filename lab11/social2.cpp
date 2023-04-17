@@ -65,7 +65,7 @@ public:
   // Attempts to sign up a new user with specified username and displayname
   // return true if the operation was successful, otherwise return false
   bool addUser(string usrn, string dspn){
-    if(numUsers >= MAX_USERS){
+    if((numUsers >= MAX_USERS) || (usrn.length() == 0)){
         return false;
     }
     for(int i = 0;i < numUsers;i++){
@@ -78,8 +78,8 @@ public:
             return false;
         }
     }
-    profiles[numUsers+1].setDisplayName(dspn);
-    profiles[numUsers+1].setUsername(usrn);
+    profiles[numUsers].setDisplayName(dspn);
+    profiles[numUsers].setUsername(usrn);
     numUsers++;
     return true;
   }

@@ -85,8 +85,8 @@ public:
                 return false;
             }
         }
-        profiles[numUsers+1].setDisplayName(dspn);
-        profiles[numUsers+1].setUsername(usrn);
+        profiles[numUsers].setDisplayName(dspn);
+        profiles[numUsers].setUsername(usrn);
         numUsers++;
         return true;
     }
@@ -97,7 +97,7 @@ public:
         }
         for(int row = 0;row < MAX_USERS;row++){
             for(int col = 0;col < MAX_USERS;col++){
-                if((Network::findID(usrn1)-1 == row) && (Network::findID(usrn2)-1 == col)){
+                if((Network::findID(usrn1) == row) && (Network::findID(usrn2) == col)){
                     following[row][col] = true;
                 }
             }
@@ -119,13 +119,16 @@ public:
         //     }
         //     cout << endl;
         // }
+
         cout << "  digraph {" << endl;
         for(int i = 0;i < numUsers;i++){
-            cout << "\"" <<  profiles[i].getUsername() << "\"" << endl;
+            cout << "   \"" <<  profiles[i].getUsername() << "\"" << endl;
         }
         for(int row = 0;row < MAX_USERS;row++){
             for(int col = 0;col < MAX_USERS;col++){
-
+                if(following[row][col]){
+                    cout << "   \"" <<  profiles[row].getUsername() << "\"" << "-> \"" << profiles[col].getUsername() << "\""<< endl;
+                }
             }
         }
     }
