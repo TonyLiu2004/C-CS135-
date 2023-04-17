@@ -1,0 +1,100 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 2 C
+
+Uses class Song to store and retrieve song information from file.
+*/
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+class Song { 
+public:
+    string name;
+    string artist;
+    int duration;
+    string genre;
+};
+
+int g_capacity = 2;
+int g_size = 0;
+
+Song *g_songs = new Song[g_capacity];
+
+//returns only the integers from a string
+int numbersFromString(string input){
+    string ret = "";
+    for(char x : input){
+        if((x-'0') < 10){ // x is a char, x minus char '0' will be the the integer value of the character. If this value is greater than 9, then it is not an integer
+            ret+= to_string(x - '0'); //appends the integer value as a string to ret
+        }
+    }
+    int n = stoi(ret);
+    return n;
+}
+
+void allocateNew(){
+    int newCapacity = g_capacity * 2;
+    Song *newSongs = new Song[newCapacity];
+    
+    for(int i = 0;i < g_capacity;i++){
+        newSongs[i].name = g_songs[i].name;
+        newSongs[i].artist = g_songs[i].artist;
+        newSongs[i].duration = g_songs[i].duration;
+        newSongs[i].genre = g_songs[i].genre;
+    }
+
+    delete[] g_songs;
+    g_songs = newSongs;
+    g_capacity = newCapacity;
+}
+
+void readSongs(string filename){
+    ifstream fin(filename);
+    if (fin.fail()) {
+        cerr << "File cannot be opened for reading." << endl;
+        exit(1); // exit if failed to open the file
+    }
+    string songName;
+    string artist;
+    int duration;
+    string genre;
+    
+    int count = 0; // counting index to update global arrays
+    string line;
+
+    while(getline(fin,line)){
+        if(g_size >= g_capacity){
+            allocateNew();
+        }
+
+        string tempLine = line;
+        if(line == ""){ //if its an empty line, skip
+            continue;
+        }
+
+        g_songs[count].name = tempLine.substr(0,line.find(":")); //finds the song name which is from index 0 to the first :
+        tempLine = tempLine.substr(tempLine.find(":")+1); // removes the song name and : from tempLine
+        
+        g_songs[count].artist = tempLine.substr(0,tempLine.find("-")); //finds the artist name from index 0 to the first -
+        tempLine = tempLine.substr(tempLine.find("-")+1); //removes the artist name and : 
+        
+        g_songs[count].genre = tempLine.substr(0,tempLine.find("-")); // finds the genre from index 0 to final -
+        tempLine = tempLine.substr(tempLine.find("-")+1); //removes the genre and :
+
+        g_songs[count].duration = numbersFromString(tempLine); //gets only the numbers from the remaining text
+
+        count++; 
+        g_size++;
+    }
+}
+int main(){
+    readSongs("songs.txt");
+
+    for(int i = 0;i < g_size;i++){
+        cout << g_songs[i].name << "---" << g_songs[i].artist << "---" << g_songs[i].genre << "---" << g_songs[i].duration << endl;
+    }
+    return 0;
+}
