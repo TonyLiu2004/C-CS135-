@@ -122,12 +122,12 @@ public:
 
         cout << "  digraph {" << endl;
         for(int i = 0;i < numUsers;i++){
-            cout << "   \"" <<  profiles[i].getUsername() << "\"" << endl;
+            cout << "   \"@" <<  profiles[i].getUsername() << "\"" << endl;
         }
         for(int row = 0;row < MAX_USERS;row++){
             for(int col = 0;col < MAX_USERS;col++){
                 if(following[row][col]){
-                    cout << "   \"" <<  profiles[row].getUsername() << "\"" << "-> \"" << profiles[col].getUsername() << "\""<< endl;
+                    cout << "   \"@" <<  profiles[row].getUsername() << "\"" << "-> \"@" << profiles[col].getUsername() << "\""<< endl;
                 }
             }
         }
