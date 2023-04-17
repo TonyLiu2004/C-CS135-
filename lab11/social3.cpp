@@ -127,7 +127,7 @@ public:
         for(int row = 0;row < MAX_USERS;row++){
             for(int col = 0;col < MAX_USERS;col++){
                 if(following[row][col]){
-                    cout << "   \"@" <<  profiles[row].getUsername() << "\"" << "-> \"@" << profiles[col].getUsername() << "\""<< endl;
+                    cout << "   \"@" <<  profiles[row].getUsername() << "\"" << " -> \"@" << profiles[col].getUsername() << "\""<< endl;
                 }
             }
         }
