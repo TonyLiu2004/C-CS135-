@@ -105,21 +105,6 @@ public:
         return true;
     }
     void printDot(){
-        // for(int i = 0;i <=numUsers;i++){
-        //     cout << profiles[i].getUsername() << " ";
-        // }
-        // cout << endl;
-        // for(int row = 0;row < MAX_USERS;row++){
-        //     for(int col = 0;col < MAX_USERS;col++){
-        //         if(following[row][col]){
-        //             cout << "t" << " ";
-        //         }else{
-        //             cout << "f" << " ";
-        //         }
-        //     }
-        //     cout << endl;
-        // }
-
         cout << "  digraph {" << endl;
         for(int i = 0;i < numUsers;i++){
             cout << "   \"@" <<  profiles[i].getUsername() << "\"" << endl;
