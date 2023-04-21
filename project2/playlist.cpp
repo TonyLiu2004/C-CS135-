@@ -61,16 +61,16 @@ int main(){
 
 
     //testing getUniqueArtists
-    // int countUnique = 0;
-    // string *uniques = getUniqueArtists(countUnique);
-    // cout << "Unique Artists: " << countUnique << endl;
-    // for(int i = 0;i < countUnique;i++){
-    //     cout << uniques[i] << endl;
-    // }
+    int countUnique = 0;
+    string *uniques = getUniqueArtists(countUnique);
+    cout << "Unique Artists: " << countUnique << endl;
+    for(int i = 0;i < countUnique;i++){
+        cout << uniques[i] << endl;
+    }
 
 
     //testing getFavoriteArtist
-    cout << "favorite artist: " << getFavoriteArtist() << endl;
+    //cout << "favorite artist: " << getFavoriteArtist() << endl;
     return 0;
 }
 
