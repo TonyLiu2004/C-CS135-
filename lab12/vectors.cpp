@@ -11,13 +11,13 @@
 #include <vector>
 using namespace std;
 
-vector<int> makeVector(int n){
-    vector<int> ret = {};
-    for(int i = 0;i < n;i++){
-        ret.push_back(i);
+    vector<int> makeVector(int n){
+        vector<int> ret = {};
+        for(int i = 0;i < n;i++){
+            ret.push_back(i);
+        }
+        return ret;
     }
-    return ret;
-}
 int main(){
     vector<int> a = makeVector(10);
     for(int i = 0;i < a.size();i++){
