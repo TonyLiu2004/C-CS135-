@@ -33,11 +33,18 @@ int sumArray(int *arr, int size){
 }
 
 bool isAlphanumeric(string s){
-    if(isalnum(s[0])){
-        return false;
+    if(s.length() > 0){
+        if(iswalnum(s[0])){
+            if(!isAlphanumeric(s.substr(1,s.length()-1))){
+                return false;
+            }
+        }else{
+            return false;
+        }
     }
     return true;
 }
+
 int main(){
     //Task A
     cout << "Print Range: ";
@@ -69,6 +76,8 @@ int main(){
     cout << "-----------------\n";
 
     //Task D
-    
+    cout << "Is alpha: ";
+    cout << isAlphanumeric("hello@123") << "\n";
+    cout << isAlphanumeric("hello123") << "\n";
     return 0;
 }
