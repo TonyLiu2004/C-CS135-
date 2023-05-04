@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 3
+
+Defines the class Profemon
+*/
 #pragma once
 #include <iostream>
 #include "skill.hpp"
@@ -23,4 +31,6 @@ class Profemon{
         void levelUp(int exp);
         bool learnSkill(int slot, Skill skill);
         void printProfemon(bool print_skills);
+        void printcurrXP();
+        void printlevelupXP();
 };

@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 3
+
+Defines the class Skill
+*/
 #pragma once
 #include <iostream>
 

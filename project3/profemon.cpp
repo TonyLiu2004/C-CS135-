@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 3
+
+Defines the public functions for the Profemon class
+*/
 #include <iostream>
 #include "profemon.hpp"
 #include "skill.hpp"
@@ -36,7 +44,11 @@ void Profemon::setName(std::string name){
 }
 
 void Profemon::levelUp(int exp){
-    int XPincrease;
+    if(exp < 0){
+        return;
+    }
+    int XPincrease = 0;
+    int XP = exp;
     if(specialty == ML){
         XPincrease = 10;
     }else if(specialty == SOFTWARE){
@@ -45,12 +57,13 @@ void Profemon::levelUp(int exp){
         XPincrease = 20;
     }
 
-    while((currXP + exp) >= levelupXP){
-        exp -= levelupXP - currXP;
+    while((currXP + XP) >= levelupXP){
+        XP -= (levelupXP - currXP);
+        level++;
         currXP = 0;
         levelupXP+=XPincrease;
     }
-    currXP = exp;
+    currXP = XP;
 }
 
 bool Profemon::learnSkill(int slot, Skill skill){
@@ -64,9 +77,18 @@ bool Profemon::learnSkill(int slot, Skill skill){
 void Profemon::printProfemon(bool print_skills){
     if(print_skills){
         std::cout << name << " [" << specialty << "] | " << "lvl " << level << " | exp " << currXP << "/" << levelupXP << " | hp " << max_health << "\n";
-        std::cout << "    " << skills[0].getName() << "[" << skills[0].getTotalUses() << "] " << skills[0].getDescription() << "\n";
-        std::cout << "    " << skills[1].getName() << "[" << skills[1].getTotalUses() << "] " << skills[1].getDescription() << "\n";
-        std::cout << "    " << skills[2].getName() << "[" << skills[2].getTotalUses() << "] " << skills[2].getDescription() << "\n";
+        for(int i =0;i < 2;i++){
+            if(skills[i].getName() != "Undefined"){
+                std::cout << "    " << skills[i].getName() << "[" << skills[i].getTotalUses() << "] : " << skills[i].getDescription() << "\n";
+            }
+        }
         std::cout << "\n";
     }
+}
+
+void Profemon::printcurrXP(){
+    std::cout << currXP << "\n";
+}
+void Profemon::printlevelupXP(){
+    std::cout << levelupXP << "\n";
 }
