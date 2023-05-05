@@ -44,9 +44,6 @@ void Profemon::setName(std::string name){
 }
 
 void Profemon::levelUp(int exp){
-    if(exp < 0){
-        return;
-    }
     int XPincrease = 0;
     int XP = exp;
     if(specialty == ML){
