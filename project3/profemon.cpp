@@ -70,14 +70,22 @@ bool Profemon::learnSkill(int slot, Skill skill){
 }
 
 void Profemon::printProfemon(bool print_skills){
+    std::string Pspecial = "";
+    if(specialty == 0){
+        Pspecial = "ML";
+    }else if(specialty == 1){
+        Pspecial = "SOFTWARE";
+    }else{
+        Pspecial = "HARDWARE";
+    }
+    
+    std::cout << name << " [" << Pspecial << "] | " << "lvl " << level << " | exp " << currXP << "/" << levelupXP << " | hp " << max_health << "\n";
     if(print_skills){
-        std::cout << name << " [" << specialty << "] | " << "lvl " << level << " | exp " << currXP << "/" << levelupXP << " | hp " << max_health << "\n";
         for(int i =0;i < 2;i++){
             if(skills[i].getName() != "Undefined"){
-                std::cout << "    " << skills[i].getName() << "[" << skills[i].getTotalUses() << "] : " << skills[i].getDescription() << "\n";
+                std::cout << "    " << skills[i].getName() << " [" << skills[i].getTotalUses() << "] : " << skills[i].getDescription() << "\n";
             }
         }
-        std::cout << "\n";
     }
 }
 

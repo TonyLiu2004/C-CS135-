@@ -22,36 +22,5 @@ int main(){
     noob.levelUp(115);
     noob2.levelUp(115);
 
-    cout << "after level up 115: " << endl;
-    cout << "LEVEL soft: " << maryash.getLevel() << endl;
-    maryash.printcurrXP();
-    maryash.printlevelupXP();
-
-    cout << "level up 50: " << endl;
-    maryash.levelUp(50);
-    cout << "LEVEL soft: " << maryash.getLevel() << endl;
-    maryash.printcurrXP();
-    maryash.printlevelupXP();
-
-    cout << "level up 50 again: " << endl;
-    maryash.levelUp(50);
-    cout << "LEVEL soft: " << maryash.getLevel() << endl;
-    maryash.printcurrXP();
-    maryash.printlevelupXP();
-
-    cout << "level up 75 : " << endl;
-    maryash.levelUp(75);
-    cout << "LEVEL soft: " << maryash.getLevel() << endl;
-    maryash.printcurrXP();
-    maryash.printlevelupXP();
-    // //-----
-    // cout << "LEVEL ML: " << noob.getLevel() << endl;
-    // noob.printcurrXP();
-    // noob.printlevelupXP();
-    // //-----
-    // cout << "LEVEL hard: " << noob2.getLevel() << endl;
-    // noob2.printcurrXP();
-    // noob2.printlevelupXP();
-
     return 0;
 }
