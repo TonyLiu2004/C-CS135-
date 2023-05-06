@@ -45,7 +45,7 @@ void Profemon::setName(std::string name){
 
 void Profemon::levelUp(int exp){
     int XPincrease = 0;
-    int XP = exp;
+    currXP+=exp;
     if(specialty == ML){
         XPincrease = 10;
     }else if(specialty == SOFTWARE){
@@ -54,13 +54,11 @@ void Profemon::levelUp(int exp){
         XPincrease = 20;
     }
 
-    while((currXP + XP) >= levelupXP){
-        XP -= (levelupXP - currXP);
+    while(currXP >= levelupXP){
+        currXP-= levelupXP;
         level++;
-        currXP = 0;
         levelupXP+=XPincrease;
     }
-    currXP = XP;
 }
 
 bool Profemon::learnSkill(int slot, Skill skill){
