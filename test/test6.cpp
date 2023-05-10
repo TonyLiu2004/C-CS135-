@@ -51,8 +51,8 @@ void printTwoParts(int arr[], int n)
 // driver program
 int main()
 {
-    int arr[] = {10, 15, 12, 18, 19, 17, 13, 35, 33};
-    int n = sizeof(arr)/sizeof(arr[0]);
-    printTwoParts(arr, n);
+    for(int i =0;i < 3;i++){
+        cout << i << " ";
+    }
     return 0;
 }

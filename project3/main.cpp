@@ -1,6 +1,7 @@
 #include <iostream>
 #include "skill.hpp"
 #include "profemon.hpp"
+#include "trainer.hpp"
 using namespace std;
 
 int main(){
@@ -12,6 +13,9 @@ int main(){
     Profemon maryash("Maryash", 13500, SOFTWARE);
     Profemon noob("noob",120,ML);
     Profemon noob2("noob2",130,HARDWARE);
+    Profemon bulb("bulb",200,ML);
+    Profemon charz("charz",150,SOFTWARE);
+
     cout << maryash.learnSkill(0, oop) << endl;
     maryash.printProfemon(true);
 
@@ -21,6 +25,14 @@ int main(){
     maryash.levelUp(115);
     noob.levelUp(115);
     noob2.levelUp(115);
+
+    cout << "------------------------\n";
+    std::vector <Profemon> pokemons = {maryash,noob,noob2};
+
+    Trainer t(pokemons); 
+    cout << "ADDING POKEMON: " << t.addProfemon(charz) << "\n";
+    cout << "REMOVING POKEMON: " << t.removeProfemon("charz") << "\n";
+    cout << "removing non-existent: " << t.removeProfemon("charmander") << "\n";
 
     return 0;
 }
