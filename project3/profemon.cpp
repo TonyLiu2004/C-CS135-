@@ -81,7 +81,7 @@ void Profemon::printProfemon(bool print_skills){
     
     std::cout << name << " [" << Pspecial << "] | " << "lvl " << level << " | exp " << currXP << "/" << levelupXP << " | hp " << max_health << "\n";
     if(print_skills){
-        for(int i =0;i < 2;i++){
+        for(int i =0;i < 3;i++){
             if(skills[i].getName() != "Undefined"){
                 std::cout << "    " << skills[i].getName() << " [" << skills[i].getTotalUses() << "] : " << skills[i].getDescription() << "\n";
             }
@@ -89,9 +89,10 @@ void Profemon::printProfemon(bool print_skills){
     }
 }
 
-void Profemon::printcurrXP(){
-    std::cout << currXP << "\n";
+int Profemon::getCurrXP(){
+    return currXP;
 }
-void Profemon::printlevelupXP(){
-    std::cout << levelupXP << "\n";
+
+int Profemon::getLevelupXP(){
+    return levelupXP;
 }

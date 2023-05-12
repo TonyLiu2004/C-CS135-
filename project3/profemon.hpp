@@ -31,6 +31,6 @@ class Profemon{
         void levelUp(int exp);
         bool learnSkill(int slot, Skill skill);
         void printProfemon(bool print_skills);
-        void printcurrXP();
-        void printlevelupXP();
+        int getCurrXP();
+        int getLevelupXP();
 };

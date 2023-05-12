@@ -1,3 +1,11 @@
+/*
+Author: Tony Liu
+Course: CSCI-135
+Instructor: Genady Maryash
+Assignment: Project 3
+
+Trainer class
+*/
 #include <iostream>
 #include "trainer.hpp"
 #include <vector>
@@ -98,5 +106,41 @@ void Trainer::setTeamMember(int slot, std::string name){
         Profemon temp  = pokedex[profemonIndex];
         removeProfemon(name);
         team[slot] = temp;
+    }
+}
+
+bool Trainer::chooseProfemon(int slot){
+    if(team[slot].getName() != "Undefined"){
+        currProfemon = &team[slot];
+        return true;
+    }
+    return false;
+}
+
+Profemon Trainer::getCurrent(){
+    return *currProfemon;
+}
+
+void Trainer::printProfedex(){
+    for(int i = 0;i < pokedex.size();i++){
+        Profemon p = pokedex[i];
+        string s;
+        if(p.getSpecialty() == 0){
+            s = "ML";
+        }else if(p.getSpecialty() == 1){
+            s = "SOFTWARE";
+        }else{
+            s = "HARDWARE";
+        }
+        cout << p.getName() << " [" << s << "] | lvl " << p.getLevel() << " | exp " << p.getCurrXP() << "/" << p.getLevelupXP() << " | hp " << p.getMaxHealth() << "\n";
+    }
+}
+
+void Trainer::printTeam(){
+    for(int i = 0;i < 3;i++){
+        if(team[i].getName() != "Undefined"){
+            team[i].printProfemon(true);
+        }
+        cout << "\n";
     }
 }

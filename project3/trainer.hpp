@@ -14,7 +14,6 @@ Defines the class Trainer
 
 class Trainer{
     private:
-        std::string name;
         std::vector <Profemon> pokedex;
         Profemon team[3];
         Profemon* currProfemon;
