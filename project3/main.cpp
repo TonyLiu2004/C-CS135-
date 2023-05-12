@@ -77,5 +77,7 @@ int main(){
     MLDept.addProfemon(darky);
 
     MLDept.printTeam();
+    cout << "---\n";
+    MLDept.printProfedex();
     return 0;
 }
