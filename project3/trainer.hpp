@@ -13,7 +13,7 @@ Defines the class Trainer
 #include <vector>
 
 class Trainer{
-    private:
+    protected:
         std::vector <Profemon> pokedex;
         Profemon team[3];
         Profemon* currProfemon;

@@ -2,6 +2,7 @@
 #include "skill.hpp"
 #include "profemon.hpp"
 #include "trainer.hpp"
+#include "department.hpp"
 using namespace std;
 
 int main(){
@@ -23,6 +24,7 @@ int main(){
     Profemon charz("charz",150,SOFTWARE);
     Profemon flip("flip",150,ML);
     Profemon eve("eve",170,SOFTWARE);
+    Profemon darky("darky",170,ML);
 
     cout << maryash.learnSkill(0, oop) << endl;
     cout << maryash.learnSkill(1, dynamic_array) << endl;
@@ -35,31 +37,45 @@ int main(){
     noob2.learnSkill(2,stare);
     //maryash.printProfemon(true);
 
-    cout << "LEVEL soft: " << maryash.getLevel() << endl;
-    cout << "LEVEL ML: " << noob.getLevel() << endl;
-    cout << "LEVEL hard: " << noob2.getLevel() << endl;
+    //cout << "LEVEL soft: " << maryash.getLevel() << endl;
+    //cout << "LEVEL ML: " << noob.getLevel() << endl;
+    //cout << "LEVEL hard: " << noob2.getLevel() << endl;
     maryash.levelUp(115);
     noob.levelUp(115);
     noob2.levelUp(115);
 
-    cout << "------------------------\n";
     std::vector <Profemon> pokemons = {maryash,noob,noob2};
 
     Trainer t(pokemons); 
-    cout << "ADDING POKEMON: " << t.addProfemon(charz) << "\n";
-    cout << "REMOVING POKEMON: " << t.removeProfemon("charz") << "\n";
-    cout << "removing non-existent: " << t.removeProfemon("charmander") << "\n";
+    //cout << "ADDING POKEMON: " << t.addProfemon(charz) << "\n";
+    //cout << "REMOVING POKEMON: " << t.removeProfemon("charz") << "\n";
+    //cout << "removing non-existent: " << t.removeProfemon("charmander") << "\n";
+    t.addProfemon(charz);
     t.addProfemon(bulb);
     t.addProfemon(flip);
     t.addProfemon(eve);
-    cout << "PRINTING POKEDEX: \n";
-    t.printProfedex();
 
-    cout << "------------------\n";
-    cout << "PRINTING TEAM: \n";
-    t.printTeam();
+    // cout << "--------1---------\n";
+    // cout << "---PRINTING POKEDEX---: \n";
+    // t.printProfedex();
+    // cout << "---PRINTING TEAM---: \n";
+    // t.printTeam();
 
-    cout << "------------------\n";
-    noob.printProfemon(true);
+
+    t.setTeamMember(0,"eve");
+    t.setTeamMember(1,"flip");
+    t.setTeamMember(2,"bulb");
+
+    // cout << "------------------\n";
+    // cout << "---PRINTING POKEDEX---: \n";
+    // t.printProfedex();
+    // cout << "---PRINTING TEAM---: \n";
+    // t.printTeam();
+
+    vector <Profemon> MLs = {noob,bulb,flip};
+    MLDepartment MLDept(MLs);
+    MLDept.addProfemon(darky);
+
+    MLDept.printTeam();
     return 0;
 }

@@ -87,17 +87,17 @@ bool Trainer::removeProfemon(std::string name){
 }
 
 void Trainer::setTeamMember(int slot, std::string name){
-    if((!contains(name)) || ((slot!=0) && (slot!=1) && (slot!=2))){ // if name does not exist or slot is not 0, 1 or 2, exit
-        return;
-    }
-
-    int profemonIndex = 0;
+    int profemonIndex = -1;
     for(int i = 0;i < pokedex.size();i++){ //finds the index of the pokemon 
         if(pokedex[i].getName() == name){
             profemonIndex = i;
+            break;
         }
     }
 
+    if(profemonIndex == -1){
+        return;
+    }
     if(team[slot].getName() != "Undefined"){ //if pokemon in team at slot is not undefined, swap the pokemons at team[slot] and the pokemon in pokedex
         Profemon temp = team[slot];
         team[slot] = pokedex[profemonIndex];
@@ -132,7 +132,7 @@ void Trainer::printProfedex(){
         }else{
             s = "HARDWARE";
         }
-        cout << p.getName() << " [" << s << "] | lvl " << p.getLevel() << " | exp " << p.getCurrXP() << "/" << p.getLevelupXP() << " | hp " << p.getMaxHealth() << "\n";
+        cout << p.getName() << " [" << s << "] | lvl " << p.getLevel() << " | exp " << p.getCurrXP() << "/" << p.getLevelupXP() << " | hp " << p.getMaxHealth() << "\n\n";
     }
 }
 
@@ -140,7 +140,7 @@ void Trainer::printTeam(){
     for(int i = 0;i < 3;i++){
         if(team[i].getName() != "Undefined"){
             team[i].printProfemon(true);
+            cout << "\n";
         }
-        cout << "\n";
     }
 }
