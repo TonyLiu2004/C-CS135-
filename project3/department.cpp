@@ -10,19 +10,24 @@ Defines the functions for departments
 #include "department.hpp"
 using namespace std;
 
-MLDepartment::MLDepartment(std::vector<Profemon> profemons){
-    int counter = 0;
-    for(int i =0;i < 3;i++){ //add to team if there are empty slots
-        if((team[i].getName() == "Undefined") && (profemons[counter].getSpecialty() == 0)){
-            team[i] = profemons[counter];
-            counter++;
+MLDepartment::MLDepartment(std::vector<Profemon> profemons) : Trainer(profemons){
+    for(int i = 0;i < profemons.size();i++){
+        if(profemons[i].getSpecialty() == 0){
+            addProfemon(profemons[i]);
         }
-        if(counter >= profemons.size()){ //exits if we run out of pokemons to add
-            return;
-        }  
     }
+    // int counter = 0;
+    // for(int i =0;i < 3;i++){ //add to team if there are empty slots
+    //     if((team[i].getName() == "Undefined") && (profemons[counter].getSpecialty() == 0)){
+    //         team[i] = profemons[counter];
+    //         counter++;
+    //     }
+    //     if(counter >= profemons.size()){ //exits if we run out of pokemons to add
+    //         return;
+    //     }  
+    // }
 
-    currProfemon = &team[0]; //selects pokemon 0 of team array to accompany the trainer.
+    // currProfemon = &team[0]; //selects pokemon 0 of team array to accompany the trainer.
 }
 
 bool MLDepartment::addProfemon(Profemon profemon){
@@ -33,19 +38,24 @@ bool MLDepartment::addProfemon(Profemon profemon){
     return false;
 }
 
-SoftwareDepartment::SoftwareDepartment(std::vector<Profemon> profemons){
-    int counter = 0;
-    for(int i =0;i < 3;i++){ //add to team if there are empty slots
-        if((team[i].getName() == "Undefined") && (profemons[counter].getSpecialty() == 1)){
-            team[i] = profemons[counter];
-            counter++;
+SoftwareDepartment::SoftwareDepartment(std::vector<Profemon> profemons) : Trainer(profemons){
+    for(int i = 0;i < profemons.size();i++){
+        if(profemons[i].getSpecialty() == 1){
+            addProfemon(profemons[i]);
         }
-        if(counter >= profemons.size()){ //exits if we run out of pokemons to add
-            return;
-        }  
     }
+    // int counter = 0;
+    // for(int i =0;i < 3;i++){ //add to team if there are empty slots
+    //     if((team[i].getName() == "Undefined") && (profemons[counter].getSpecialty() == 1)){
+    //         team[i] = profemons[counter];
+    //         counter++;
+    //     }
+    //     if(counter >= profemons.size()){ //exits if we run out of pokemons to add
+    //         return;
+    //     }  
+    // }
 
-    currProfemon = &team[0]; //selects pokemon 0 of team array to accompany the trainer.
+    // currProfemon = &team[0]; //selects pokemon 0 of team array to accompany the trainer.
 }
 
 bool SoftwareDepartment::addProfemon(Profemon profemon){
@@ -56,19 +66,24 @@ bool SoftwareDepartment::addProfemon(Profemon profemon){
     return false;
 }
 
-HardwareDepartment::HardwareDepartment(std::vector<Profemon> profemons){
-    int counter = 0;
-    for(int i =0;i < 3;i++){ //add to team if there are empty slots
-        if((team[i].getName() == "Undefined") && (profemons[counter].getSpecialty() == 2)){
-            team[i] = profemons[counter];
-            counter++;
+HardwareDepartment::HardwareDepartment(std::vector<Profemon> profemons) : Trainer(profemons){
+    for(int i = 0;i < profemons.size();i++){
+        if(profemons[i].getSpecialty() == 2){
+            addProfemon(profemons[i]);
         }
-        if(counter >= profemons.size()){ //exits if we run out of pokemons to add
-            return;
-        }  
     }
+    // int counter = 0;
+    // for(int i =0;i < 3;i++){ //add to team if there are empty slots
+    //     if((team[i].getName() == "Undefined") && (profemons[counter].getSpecialty() == 2)){
+    //         team[i] = profemons[counter];
+    //         counter++;
+    //     }
+    //     if(counter >= profemons.size()){ //exits if we run out of pokemons to add
+    //         return;
+    //     }  
+    // }
 
-    currProfemon = &team[0]; //selects pokemon 0 of team array to accompany the trainer.
+    // currProfemon = &team[0]; //selects pokemon 0 of team array to accompany the trainer.
 }
 
 bool HardwareDepartment::addProfemon(Profemon profemon){
