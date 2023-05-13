@@ -6,6 +6,7 @@ Assignment: Project 3
 
 Header for the departments
 */
+// This is an introductory comment
 #ifndef DEPARTMENT
 #define DEPARTMENT
 
