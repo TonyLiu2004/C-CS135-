@@ -77,5 +77,14 @@ int main(){
     
     banana b1(120,69);
     b1.printFruit();
+
+    double* p_num = new double[10];
+    for(int i = 0;i < 10;i++){
+        p_num[i] = i;
+    }    
+    
+    for(int i = 0;i < 10;i++){
+        cout << p_num[i] << " ";
+    }
     return 0;
 }
