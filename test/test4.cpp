@@ -1,10 +1,38 @@
 #include <iostream>
 using namespace std;
-int main(){
-    int *counts[10];
-    for(int i =0;i < 10;i++){
-        counts[i] = new int[i];
 
+int Rsum(int a, int b){
+    if(a==b){
+        return a;
     }
-    cout << *counts[1] << " " << *counts[0];
+    return a + Rsum(a+1,b);
+}
+
+void pTri(int a){
+    if(a==0){
+        return;
+    }
+    for(int i = 0;i < a;i++){
+        cout << "[]";
+    }
+    cout <<"\n";
+    pTri(a-1);
+}
+
+void pTri2(int a){
+    if(a==0){
+        return;
+    }
+    pTri2(a-1);
+    for(int i = 0;i < a;i++){
+        cout << "[]";
+    }
+    cout << "\n";
+}
+
+int main(){
+    cout << Rsum(1,3) << "\n";
+    pTri(4);
+    cout << "\n";
+    pTri2(4);
 }
